@@ -6,6 +6,11 @@ if(!isset($_SESSION['invite_ID'])){
 	exit;
 }
 
+$emails = 'jdenoc@gmail.com, brit.waid@yahoo.com';
+$headers  = 'MIME-Version: 1.0' . "\r\n";
+$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+$headers .= 'From: Wedding Site <wedding@jdenoc.com>' . "\r\n";
+
 // SONG 1
 $s1 = (isset($_POST['song_1']) && $_POST['song_1']!='')? trim($_POST['song_1']) : '';
 $a1 = (isset($_POST['artist_1']) && $_POST['artist_1']!='')? trim($_POST['artist_1']) : '';
@@ -56,7 +61,7 @@ if($add_song1 || $add_song2 || $add_song3){
             'song_artist'=>$a1,
             'song_album'=>$al1)
         );
-        $msg .= 'Song: '.$s1.'\nArtist: '.$a1.'\nAlbum: '.$al1.'\n';
+        $msg .= 'Song: '.$s1.'<br/>Artist: '.$a1.'<br/>Album: '.$al1.'<br/>';
 	}
 	if($add_song2){
         $db->insert('music', array(
@@ -64,7 +69,7 @@ if($add_song1 || $add_song2 || $add_song3){
                 'song_artist'=>$a2,
                 'song_album'=>$al2)
         );
-        $msg .= 'Song: '.$s2.'\nArtist: '.$a2.'\nAlbum: '.$al2.'\n';
+        $msg .= 'Song: '.$s2.'<br/>Artist: '.$a2.'<br/>Album: '.$al2.'<br/>';
 	}
 	if($add_song3){
         $db->insert('music', array(
@@ -72,13 +77,13 @@ if($add_song1 || $add_song2 || $add_song3){
                 'song_artist'=>$a3,
                 'song_album'=>$al3)
         );
-        $msg .= 'Song: '.$s3.'\nArtist: '.$a3.'\nAlbum: '.$al3.'\n';
+        $msg .= 'Song: '.$s3.'<br/>Artist: '.$a3.'<br/>Album: '.$al3.'<br/>';
 	}
 
 	$invite_ID = $_SESSION['invite_ID'];
     $db->update('details', array('musicSet'=>1), array('id'=>$invite_ID));
 
-    mail('info@jdenoc.com', 'Music submission', $msg);
+    mail($emails, 'Music submission', $msg, $headers);
 }
 header("Location:../rsvp.php");
 exit;
