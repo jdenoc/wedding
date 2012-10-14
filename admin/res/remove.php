@@ -5,31 +5,37 @@ if(!isset($_SESSION['user'])){
 	header('location:../index.php');
 }
 include_once '../../res/connection.php';
+$db = new pdo_connection("jdenocco_wedding");
 $ID = $_GET['id'];
 
 if(isset($_GET['music'])){
 	$tbl_name = 'music';
 	$url_ext = 'music=ngaskgb&';
 	$type = 'Song';
+}elseif(isset($_GET['info'])){
+    $tbl_name = 'info';
+    $url_ext = 'info_update=ngaskgb&';
+    $type = 'Entry';
 }else{
 	$tbl_name = 'details';
 	$url_ext = '';
 	$type = 'Invite';
 }
-$query = mysql_query("SELECT * FROM $tbl_name WHERE id='$ID'") or die("Entry not found!");
-$result = mysql_fetch_assoc($query);
 
-if(!isset($_GET['music'])){
-	$display = $result['invite_name'];
+$result = $db->getRow("SELECT * FROM $tbl_name WHERE id=:id", array('id'=>$ID));
+
+if(isset($_GET['music'])){
+    $display = '<strong><em>'.$result['song_title'].'</em></strong><br/>';
+    if($result['song_artist'] != null){
+        $display .= 'by <em>'.$result['song_artist'].'</em>';
+    }
 }else{
-	$display = '<strong><em>'.$result['song_title'].'</em></strong><br/>';
-	if($result['song_artist'] != null){
-		$display .= 'by <em>'.$result['song_artist'].'</em>';
-	}
+    $display = $result['invite_name'];
 }
 ?>
 <html><body>
-<table border="0" style="color:#111"><form action="res/update.php?<?php echo $url_ext; ?>x=njskbdjbsdjbsjk" method="post">
+<form action="res/update.php?<?php echo $url_ext; ?>x=njskbdjbsdjbsjk" method="post">
+<table border="0" style="color:#111">
 	<tr><td colspan="3" align="center"><h1><?php echo 'Delete '.$type.' '.$ID; ?></h1></td></tr>
 	<tr>
 		<th colspan="3">Are you sure you want to delete this <?php echo $type; ?>?</th>
@@ -43,7 +49,8 @@ if(!isset($_GET['music'])){
 		</td>
 		<td>&nbsp;</td>
 	</tr>
-	</form></table>
+</table>
+</form>
 	<br/>
 </body></html>
-<?php mysql_free_result($query); ?>
+<?php $db->closeConnection(); ?>

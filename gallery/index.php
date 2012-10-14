@@ -47,28 +47,27 @@ function fileCount($dir){
     <li class="gallery_nav"><a href="index.php?gallery=usa">Nebraskan Reception (<?php echo fileCount('reception_usa/');?>)</a></li>
     <li class="gallery_nav"><a href="index.php?gallery=roi">Irish Reception (<?php echo fileCount('reception_ireland/');?>)</a></li>
     <li class="gallery_nav"><a href="index.php?gallery=misc">Misc. (<?php echo fileCount('misc/');?>)</a></li>
-</ul>
-</div>
+</ul></div>
 <ul id="slideshow"><?php
- if(isset($_GET['gallery'])){
-     if($_GET['gallery'] == 'engagement' || !in_array($_GET['gallery'], array('engagement', 'ceremony', 'usa', 'roi', 'misc'))){
-         engagement();
-     }elseif($_GET['gallery'] == 'ceremony'){
-         $dir = (fileCount('ceremony/') > 0) ? 'ceremony/' : '404/';
-         other_events($dir, 'Wedding Ceremony');
-     }elseif($_GET['gallery'] == 'usa'){
-         $dir = (fileCount('reception_usa/') > 0) ? 'reception_usa/' : '404/';
-         other_events($dir, 'Nebraska Reception');
-     }elseif($_GET['gallery'] == 'roi'){
-         $dir = (fileCount('reception_ireland/') > 0) ? 'reception_ireland/' : '404/';
-         other_events($dir, 'Ireland Reception');
-     }elseif($_GET['gallery'] == 'misc'){
-         $dir = (fileCount('misc/') > 0) ? 'misc/' : '404/';
-         other_events($dir, 'Misc.');
-     }
- }else{
-     engagement();
- }?>
+if(isset($_GET['gallery'])){
+    if($_GET['gallery'] == 'engagement' || !in_array($_GET['gallery'], array('engagement', 'ceremony', 'usa', 'roi', 'misc'))){
+        engagement();
+    }elseif($_GET['gallery'] == 'ceremony'){
+        $dir = (fileCount('ceremony/') > 0) ? 'ceremony/' : '404/';
+        other_events($dir, 'Wedding Ceremony');
+    }elseif($_GET['gallery'] == 'usa'){
+        $dir = (fileCount('reception_usa/') > 0) ? 'reception_usa/' : '404/';
+        other_events($dir, 'Nebraska Reception');
+    }elseif($_GET['gallery'] == 'roi'){
+        $dir = (fileCount('reception_ireland/') > 0) ? 'reception_ireland/' : '404/';
+        other_events($dir, 'Ireland Reception');
+    }elseif($_GET['gallery'] == 'misc'){
+        $dir = (fileCount('misc/') > 0) ? 'misc/' : '404/';
+        other_events($dir, 'Misc.');
+    }
+}else{
+    engagement();
+}?>
 </ul>
 <div id="wrapper">
     <div id="fullsize">

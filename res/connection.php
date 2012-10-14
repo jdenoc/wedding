@@ -1,10 +1,91 @@
 <?php
-// connection.php
-$host="localhost"; 				// Host name 
-$username="jdenocco_root"; 		// Mysql username 
-$password="root_pass"; 			// Mysql password 
-$db_name="jdenocco_wedding";	// Database name 
+/**
+ * Author: Denis O'Connor
+ * Last Modified: 13-OCT-2012
+ */
+class pdo_connection{
 
-mysql_connect("$host", "$username", "$password")or die("Connection error. Try again later");
-mysql_select_db("$db_name")or die("Database connection error. Try again later");
-?>
+    private $db;
+    private $host="localhost"; 				// Host name
+    private $username="jdenocco_root"; 		// Mysql username
+    private $password="root_pass"; 			// Mysql password
+
+    public function __construct($db_name){
+        $this->db = new PDO(
+            "mysql:host=$this->host;dbname=$db_name",
+            $this->username,
+            $this->password
+        );
+    }
+
+    public function getAllRows($stmt, $bind=array()){
+        $query = $this->db->prepare($stmt);
+        foreach($bind as $key=>$item){
+            $query->bindValue(':'.$key, $item, PDO::PARAM_STR);
+        }
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    public function getValue($stmt, $bind=array()){
+        $query = $this->db->prepare($stmt);
+        /*** bind the paramaters ***/
+        foreach($bind as $key=>$item){
+            $query->bindParam(':'.$key, $item, PDO::PARAM_STR);
+        }
+        $query->execute();
+        return $query->fetchColumn();
+    }
+
+    public function getRow($stmt, $bind=array()){
+        $query = $this->db->prepare($stmt);
+        /*** bind the paramaters ***/
+
+        foreach($bind as $key=>$item){
+            $query->bindValue(':'.$key, $item, PDO::PARAM_STR);
+        }
+        $query->execute();
+        return $query->fetch();
+    }
+
+    public function insert($tbl_name, $array=array()){
+        $values = '';
+        foreach($array as $key=>$value){
+            $values .= " $key='$value',";
+        }
+        $values = substr($values, 0, strlen($values)-1);
+
+        return $this->db->exec("INSERT INTO $tbl_name SET $values");
+    }
+
+    public function update($tbl_name, $array=array(), $whereArray=array()){
+        $values = '';
+        foreach($array as $key=>$value){
+            $values .= " $key='$value',";
+        }
+        $values = substr($values, 0, strlen($values)-1);
+
+        $where = '';
+        foreach($whereArray as $key=>$value){
+            $where .= " $key=".((isset($value))? "'$value'," : null);
+        }
+        $where = substr($where, 0, strlen($where)-1);
+
+//        echo "UPDATE ".$tbl_name." SET ".$values." WHERE ".$where;
+        return $this->db->exec("UPDATE $tbl_name SET $values WHERE $where");
+    }
+
+    public function delete($tbl_name, $array=array()){
+        $values = '';
+        foreach($array as $key=>$value){
+            $values .= " $key='$value',";
+        }
+        $values = substr($values, 0, strlen($values)-1);
+
+        return $this->db->exec("DELETE FROM $tbl_name WHERE $values");
+    }
+
+    public function closeConnection(){
+        $this->db = null;
+    }
+}

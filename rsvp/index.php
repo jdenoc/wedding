@@ -9,36 +9,26 @@ if(isset($_SESSION['invite_ID'])){
 $showWarning = false;
 if(isset($_POST['proceed'])){
 	include_once('../res/connection.php');
-	$tbl_name = 'invites';
+    $db = new pdo_connection('jdenocco_wedding');
 	$code = strtolower($_POST['invite_code']);
 	$code = trim($code);
-	$code = stripslashes($code);
-	$code = mysql_real_escape_string($code);
-	$sql = "SELECT * FROM $tbl_name WHERE code='$code'";
-	
-	$result=mysql_query($sql);
-	$count = mysql_num_rows($result);
-	if($count == 1){
-		$result_details = mysql_fetch_assoc($result);
-		$tbl_name = 'details';
-		$id = $result_details['invitee_id'];
-		$result = mysql_query("SELECT * FROM $tbl_name WHERE id='$id'");
-		$result_details = mysql_fetch_assoc($result);
-		
-		$_SESSION['invite_ID'] = $id;
-		unset($_POST['invite_code']);
-		if($result_details['coming']!=1 || $result_details['coming']!=0){
-//            echo 'success!!!';
+    $invites = $db->getRow("SELECT * FROM invites WHERE code=:code", array('code'=>$code));
+
+    if(!empty($invites) && $code != ''){
+        $id = $invites['invitee_id'];
+        $details = $db->getRow("SELECT * FROM details WHERE id=:id", array('id'=>$id));
+        $_SESSION['invite_ID'] = $id;
+        unset($_POST['invite_code']);
+        if(isset($details['coming']) && ($details['coming'] == 0 || $details['coming'] == 1)){
+            header("Location:complete.php?x=bhjkasbgh");
+            exit;
+        }else{
             header("Location:rsvp.php");
-			exit;
-		}else{
-//            echo 'failure'.$result_details['coming'];
-			header("Location:complete.php?x=bhjkasbgh");
-			exit;
-		}
-	}else{
+            exit;
+        }
+    }else{
 		$showWarning = true;
-	}
+    }
 }
 ?>
 
@@ -58,19 +48,16 @@ if(isset($_POST['proceed'])){
 		</tr>
 		<tr>
 			<td colspan="2" width="500px">
-				If you're here, it means that you have received an invite to our wedding reception party and didn't want to send us your invite in the post.</br><br/>
+				If you're here, it means that you have received an invite to our wedding reception party and didn't want to send us your invite in the post.<br/><br/>
 			</td>
 		</tr>
 		<form action="index.php" method="post">
 		<?php if($showWarning){
-			echo '<tr style="color:#F00">
-				<td><strong>*** ATTENTION!!! ***</strong></td>';
-				if(empty($code)){
-					echo '<td>Please enter a value into the Invite code Field below</td>';
-				}else{
-					echo '<td>Invite code entry incorrect</td>';
-				}
+			echo '<tr style="color:#F00; font-family: tahoma; font-size: 16px;">
+				<th>ATTENTION!!!</th>';
+			    echo (empty($code))? '<td>Please enter a value into the Invite code Field below</td>' : '<td>Invite code entry incorrect</td>';
 			echo '</tr>';
+            session_destroy();
 		} ?>
 		<tr>
 			<td align="right">Please enter your invite code </td>
@@ -83,12 +70,9 @@ if(isset($_POST['proceed'])){
 		<tr>
 			<td valign="top" colspan="2">This code can be found in your invitation here:</td>
         </tr><tr>
-			<td align="right" colspan="2"><br/><br/><img src="imgs/find-code.png" alt="invite code" class="shadow"/></td>
+			<td align="right" colspan="2"><br/><br/><img src="../imgs/find-code.png" alt="invite code" class="shadow"/></td>
 		</tr>
 	</table></div><br/><br/>
-<!--	<div id="foot">-->
-<!--		--><?php //include_once "res/page_footer.php" ?>
-<!--	</div>-->
 </div>
 </body>
-<html>
+</html>

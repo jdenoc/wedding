@@ -1,4 +1,4 @@
-<?php // complete.php
+<?php // complete.php (rsvp)
 session_name('rsvp');
 session_start();
 if(!isset($_SESSION['invite_ID'])){
@@ -15,9 +15,9 @@ if(isset($_GET['x'])){
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<header>
+<head>
 	<?php include_once('res/header_details.php'); ?>
-</header>
+</head>
 <body>
 <div id="container">
 	<div id="head">
@@ -27,9 +27,6 @@ if(isset($_GET['x'])){
 			session_destroy();
 			echo $responce;
 	?></div>
-	<div id="foot">
-		<?php include_once('res/page_footer.php'); ?>
-	</div>
 </div>
 </body>
 </html>

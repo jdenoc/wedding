@@ -6,13 +6,13 @@ function fillRow($title, $name){
 ?>
 
 <div id="music_form" style="width:550px; height:350px; overflow:auto; padding-left:10px; font-family:'Merienda One', cursive;">
-<table border="0" style="color: #111;">
 <form method="post" action="res/submit_music.php">
+<table border="0" style="color: #111;">
 	<tr>
 		<td colspan="3">
-		Enter a song title to have your song considered for addition to our wedding playlist.<br/>
-		Add "Artist" & "Album Title" to make sure we've got the right song.<br/>
-		(Note: Artist & Album Title are optional)<br/><br/>
+            Enter a song title to have it considered for addition to our wedding playlist.<br/>
+            Add "Artist" & "Album Title" to make sure we've got the right song.<br/>
+            (Note: Artist & Album Title are optional)<br/><br/>
 		</td>
 	</tr>
 <!-- SONG1 -->
@@ -56,4 +56,6 @@ function fillRow($title, $name){
 			<input type="reset" class="button" value="Reset Music Selection" onclick="showCell('show_music1');hideStuff('hr1');hideStuff('song2');hideStuff('art2');hideStuff('album2');hideStuff('hr2');hideStuff('song3');hideStuff('art3');hideStuff('album3');"/><br/>
 		</td>
 	</tr>
-</form></table>
+</table>
+</form>
+</div>

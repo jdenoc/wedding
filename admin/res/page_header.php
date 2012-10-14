@@ -3,5 +3,5 @@
 	<li><a href="../">Home</a></li>
 	<li><a href="../rsvp">RSVP</a></li>
 	<li><a href="../gallery">Gallery</a></li>
-	<li><a href="../gallery">Locations</a></li>
+	<li><a href="../details.php">Details</a></li>
 </ul>

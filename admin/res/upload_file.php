@@ -23,9 +23,8 @@ if(!isset($_POST['folder']) || $_POST['folder'] == ''){
 
 echo '<h1>Upload Summary</h1><br/><br/>';
 
-// make sure file is a valid file type, i.e.: jpg, png, gif
-if ((($_FILES["file"]["type"] == "image/gif")
-|| ($_FILES["file"]["type"] == "image/jpeg")
+// make sure file is a valid file type, i.e.: jpg, png
+if ((($_FILES["file"]["type"] == "image/jpeg")
 || ($_FILES["file"]["type"] == "image/pjpeg")	// related to IE only
 || ($_FILES["file"]["type"] == "image/png"))
 && ($_FILES["file"]["size"] < $limit)){
@@ -41,55 +40,55 @@ if ((($_FILES["file"]["type"] == "image/gif")
         if (file_exists($dir . $filename)){
             echo '<strong>'.$_FILES['file']['name'] ."</strong> already exists. ";
         }else{
-            recreate($_FILES["file"]["type"], $_FILES["file"]["tmp_name"], $dir, $filename, $maxHeight, $maxWidth);
+            recreate($_FILES["file"]["type"], $_FILES["file"]["tmp_name"], $dir, $filename, $maxHeight, $maxWidth, 'Image');
             echo "File uploaded: ".$filename."<br />";
             echo "To: ".$dir."<br/>";
             echo "Size: ".($_FILES["file"]["size"] / 1024)." Kb<br />";
             // create a thumb for the uploaded img with max dimensions 500x300
-            recreate($_FILES["file"]["type"], $_FILES["file"]["tmp_name"], $dir.'/thumbnails/', $filename, $thumbHeight, $thumbWidth);
+            recreate($_FILES["file"]["type"], $_FILES["file"]["tmp_name"], $dir.'/thumbnails/', $filename, $thumbHeight, $thumbWidth, 'Thumbnail');
         }
     }
     echo '<br/>You will now be redirected back to the admin page.';
 }else{
     echo "Invalid file   -   ".$_FILES["file"]["type"];
 }
-echo '<meta http-equiv="Refresh" content="2; URL=../../admin">';	// redirect 2 secs after upload/failure
+echo '<meta http-equiv="Refresh" content="5; URL=../../admin">';	// redirect 5 secs after upload/failure
 // unset $_FILE variables
 unset($filename, $_FILES["file"]["size"], $_FILES["file"]["name"], $_FILES["file"]["type"], $_FILES["file"]["tmp_name"]);
 
 
-function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth){
+function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth, $file_name){
     //imagecreatefromjpg, imagecreatefrompng, imagecreatefromgif, etc. depending on user's uploaded file extension
     if($type == "image/jpeg" || $type == "image/pjpeg"){
         $img = imagecreatefromjpeg($src);
-    }elseif($type == "image/gif"){
-        $img = imagecreatefromgif($src);
     }elseif($type == "image/png"){
         $img = imagecreatefrompng($src);
     }else{
         return NULL;
     }
 
-    $width = imagesx($img); 	//get width of original image
-    $height = imagesy($img);	//get height of original image
+    $original_width = imagesx($img); 	//get width of original image
+    $original_height = imagesy($img);	//get height of original image
 
-    //determine which side is the longest to use in calculating length of the shorter side, since the longest will be the max size for whichever side is longest.
-    $newwidth = $maxwidth;
-    $newheight = $maxheight;
-    if ($height > $width) {
-        if($height >= $maxheight){
-            $ratio = $maxheight / $height;
-            $newwidth = $width * $ratio;
-        }
-    }else{
-        if($width >= $maxwidth){
-            $ratio = $maxwidth / $width;
-            $newheight = $height * $ratio;
+//determine which side is the longest to use in calculating length of the shorter side, since the longest will be the max size for whichever side is longest.
+    $width = $original_width;
+    $height = $original_height;
+    echo 'original:'.$width.' x '.$height.'<br/>';
+    while($height > $maxheight || $width > $maxwidth){
+        if ($height > $maxheight){
+                $ratio = $maxheight / $height;
+                $width = $width * $ratio;
+                $height = $height * $ratio;
+        }elseif($width > $maxwidth){
+                $ratio = $maxwidth / $width;
+                $height = $height * $ratio;
+                $width = $width * $ratio;
         }
     }
+    echo 'new:'.$width.' x '.$height.'<br/>';
 
     //create new image resource to hold the resized image
-    $newimg = imagecreatetruecolor($newwidth,$newheight);
+    $newimg = imagecreatetruecolor($width,$height);
     $palsize = ImageColorsTotal($img);   // Get palette size for original image
     for ($i = 0; $i < $palsize; $i++){ 	 // Assign color palette to new image
         $colors = ImageColorsForIndex($img, $i);
@@ -97,18 +96,16 @@ function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth){
     }
 
     //copy original image into new image at new size.
-    imagecopyresized($newimg, $img, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+    imagecopyresized($newimg, $img, 0, 0, 0, 0, $width, $height, $original_width, $original_height);
 
 
     //Have to figure that one out yourself using whatever rules you want.  Can use imagegif() or imagepng() or whatever.
     $created = null;
     if($type == "image/jpeg" || $type == "image/pjpeg"){
         $created = imagejpeg($newimg, '../../gallery/'.$dir.$filename, 100); //$output file is the path/filename where you wish to save the file.
-    }elseif($type == "image/gif"){
-        $created = imagegif($newimg, $dir.$filename, 100); //$output file is the path/filename where you wish to save the file.
     }elseif($type == "image/png"){
-        $created = imagepng($newimg, $dir.$filename, 100); //$output file is the path/filename where you wish to save the file.
+        $created = imagepng($newimg, '../../gallery/'.$dir.$filename, 9); //$output file is the path/filename where you wish to save the file.
     }
-    echo ($created)? 'Created<br/>' : 'Creation Failed<br/>';
+    echo $file_name.(($created)? ' Created<br/>' : ' Creation Failed<br/>');
 }
 ?>

@@ -1,17 +1,11 @@
-<?php // add.php
+<?php // add.php (ADMIN)
 session_name('wedding_admin');
 session_start();
 if(!isset($_SESSION['user'])){
 	header('location:../index.php');
 }
 
-if(!isset($_GET['music'])){
-include_once '../../res/connection.php';
-//$tbl_name = 'location';
-//$sql_location = "SELECT * FROM $tbl_name";
-//$location_query = mysql_query($sql_location);
-//$location = mysql_fetch_assoc($location_query);
-?>
+if(!isset($_GET['music'])){ ?>
 <html>
 <head><script type="text/javascript">
 function random_code(){
@@ -37,13 +31,6 @@ function random_code(){
 		<td colspan="3">
 			<input type="text" name="name" maxlength="100" size="25" />
 		</td>
-	</tr><tr>
-		<td>Location:&nbsp;&nbsp;</td>
-		<td><select name="location">
-			<?php do{
-			echo '<option value="'.$location['id'].'">'.$location['location'].'</option>';
-			} while($location = mysql_fetch_assoc($location_query));?>
-		</select></td>
 	</tr><tr>
 		<td>No. of Guests:</td>
 		<td>
@@ -80,11 +67,10 @@ function random_code(){
     </form>
 	<br>
 </body></html>
-<?php mysql_free_result($location_query);
-}else{ ?>
+<?php }else{ ?>
 <html><body>
     <form action="res/update.php?music=bvhjaskd&add=sbhjksvbdhk" method="post">
-    <table border="0">
+    <table border="0" style="color: #111;">
 	<tr>
 		<td colspan="2" align="center"><h1>Add Song</h1></td>
 	</tr><tr>
@@ -97,7 +83,7 @@ function random_code(){
 		<td><input type="text" name="artist" maxlength="100" size="30" /></td>
 	</tr><tr>
 		<td>Album:</td>
-		<td><input type="text" name="number" maxlength="100" size="30" /></td>
+		<td><input type="text" name="album" maxlength="100" size="30" /></td>
 	</tr><tr>
 		<td>&nbsp;</td>
 	</tr><tr>

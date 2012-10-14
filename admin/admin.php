@@ -6,6 +6,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == ''){
     exit;
 }
 include_once '../res/connection.php';
+$db = new pdo_connection("jdenocco_wedding");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,36 +17,65 @@ include_once '../res/connection.php';
 <div id="container">
 	<div id="head"><?php include_once 'res/page_header.php'; ?></div>
 	<div id="main">
-		<span style="float:right;padding-right: 30px;">
-			<span class="button" style="display:block;">
-                <a href="res/upload.php" title="Upload Image" class="inline">Upload Image</a>
-            </span><br/>
-            <span class="button" id="music_button" style="display:block">
-				<a href="#" title="Change Display" onclick="showStuff('invite_button');showStuff('music_list');hideStuff('music_button');hideStuff('invite_list')">
-				Display Music</a>
-			</span>
-			<span class="button" id="invite_button" style="display:none">
-				<a href="#" title="Change Display" onclick="hideStuff('invite_button');hideStuff('music_list');showStuff('music_button');showStuff('invite_list')">
-				Display Invites</a>
-			</span><br/>
-			<span class="button">
-				<a href="#stats" title="Statistics" class="inline">Stats</a>
-			</span>
-		</span>
+<!--		<span style="float:right;padding-right: 30px;">-->
+<!--			<span class="button" style="display:block;">-->
+<!--                <a href="res/upload.php" title="Upload Image" class="inline">Upload Image</a>-->
+<!--            </span><br/>-->
+<!---->
+<!--            --><?php //if(!isset($_GET['display']) || $_GET['display']=='invites'){ ?>
+<!--            <span class="button" style="display:block">-->
+<!--				<a href="admin.php?display=music" title="Change Display">-->
+<!--				Display Music</a>-->
+<!--			</span><br/>-->
+<!--            --><?php //}else { ?>
+<!--			<span class="button" style="display:block;">-->
+<!--				<a href="admin.php?display=invites" title="Change Display" >-->
+<!--				Display Invites</a>-->
+<!--			</span><br/>-->
+<!--            --><?php //} ?>
+<!---->
+<!--            <span class="button" style="display: block;">-->
+<!--				<a href="res/info.php" title="" class="inline">Update Details</a>-->
+<!--			</span><br/>-->
+<!--            <span class="button" style="display:block">-->
+<!--				<a href="res/stats.php" title="Statistics" class="inline">Stats</a>-->
+<!--			</span><br/>-->
+<!---->
+<!--		</span>-->
+        <table style="float:right;padding-right: 30px;">
+            <tr>
+                <td class="button">
+                    <a href="res/upload.php" title="Upload Image" class="inline">Upload Image</a>
+                </td>
+                <td width="20px">&nbsp;</td>
+                <td class="button">
+                    <?php if(!isset($_GET['display']) || $_GET['display']=='invites'){ ?>
+                    <a href="admin.php?display=music" title="Change Display">
+                        Display Music</a>
+                    <?php }else { ?>
+                    <a href="admin.php?display=invites" title="Change Display" >
+                        Display Invites</a>
+                    <?php } ?>
+                </td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+                <td class="button">
+                    <a href="res/info.php" title="" class="inline">Update Details</a>
+                </td>
+                <td width="20px">&nbsp;</td>
+                <td class="button">
+                    <a href="res/stats.php" title="Statistics" class="inline">Stats</a></td>
+            </tr>
+        </table>
 		<h1>WELCOME <?php echo strtoupper($_SESSION['user']); ?> !!!</h1>
 		<?php 
-		 echo '<div id="invite_list" style="display:block">';
-		 include_once 'res/guests.php'; 
-		 echo '</div><div id="music_list" style="display:none">';
-		 include_once 'res/music.php';
-		 echo '</div>';
+        if(!isset($_GET['display']) || $_GET['display']=='invites'){
+            include_once 'res/guests.php';
+        }else{
+		    include_once 'res/music.php';
+        }
 		 ?>
 	</div>
-	<div id="foot"><?php 
-		include_once 'res/page_footer.php'; 
-		echo '<div style="display:none;">';
-			include_once 'res/stats.php';
-		echo '</div>';
-	?></div>
 </body>
 </html>

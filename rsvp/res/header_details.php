@@ -1,7 +1,7 @@
 <title>RSVP | Denis & Britain's Wedding Reception</title>
 <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="../css/wedding-css.css" />
-<link rel="icon" href="imgs/ico/favicon.ico" type="image/x-icon">
+<link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
 <script type="text/javascript" src="../js/alerts.js"></script>
 
 <!-- FANCY BOX Setup -->

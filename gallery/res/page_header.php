@@ -32,5 +32,5 @@
 	<li class="nav"><a href="../">Home</a></li>
 	<li class="nav"><a href="../rsvp">RSVP</a></li>
 	<li class="nav"><a href="../gallery">Gallery</a></li>
-	<li class="nav"><a href="../locations.php">Locations</a></li>
+	<li class="nav"><a href="../details.php">Details</a></li>
 </ul>

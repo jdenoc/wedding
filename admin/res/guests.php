@@ -1,13 +1,11 @@
-<?php // guests.php
+<?php // guests.php    (ADMIN)
 $where = '';
 if(isset($_GET['show']) && $_GET['show']=='irish'){       // Ireland = 1
     $where = "WHERE location_ID=1";
 }elseif(isset($_GET['show']) && $_GET['show']=='usa'){      // Nebraska = 2
     $where = "WHERE location_ID=2";
 }
-$sql = "SELECT * FROM details $where";
-$invite_query = mysql_query($sql);
-$details = mysql_fetch_assoc($invite_query);
+$detail_rows = $db->getAllRows("SELECT * FROM details $where");
 
 function update_invite_entry($ID, $set){
     echo '<td align="center">&nbsp;
@@ -44,56 +42,55 @@ function reload(show){
 <table border="0">
 	<tr>
 		<th valign="bottom" align="right">ID</th>
-		<td width="10px">&nbsp;</td>
-		<th width="200px" valign="bottom">Invitee</th>
+		<td valign="bottom" width="10px">&nbsp;</td>
+		<th valign="bottom" width="200px">Invitee</th>
 		<th valign="bottom">Coming</th>
-		<td width="30px">&nbsp;</td>
-		<th align="left" valign="bottom">No. of<br/>Guests</th>
-		<th width="50px" valign="bottom">Contact<br/>Number</th>
-		<th width="200px" valign="bottom">Address</th>
-		<th width="60px" valign="bottom">Code</th>
+		<td valign="bottom" width="30px">&nbsp;</td>
+		<th valign="bottom" align="left">No. of<br/>Guests</th>
+		<th valign="bottom" width="50px">Contact<br/>Number</th>
+		<th valign="bottom" width="200px">Address</th>
+		<th valign="bottom" width="60px">Code</th>
 	</tr>
 	<tr><td colspan="10"><div class="sexy_line"></div></td></tr>
 	<?php
-    if(isset($details) && !empty($details)){
-        do{ $line++;
-            $code_q = mysql_query("SELECT code FROM invites WHERE invitee_id=".$details['id']);
-            $code = mysql_fetch_assoc($code_q);
-            $location_q = mysql_query("SELECT location FROM location WHERE id=".$details['location_ID']);
-            $location = mysql_fetch_assoc($location_q);
+    if(isset($detail_rows) && !empty($detail_rows)){
+        foreach($detail_rows as $details){
+            $line++;
+            $code = $db->getValue("SELECT code FROM invites WHERE invitee_id=:id", array('id'=>$details['id']));
+            $location = $db->getValue("SELECT location FROM location WHERE id=:id", array('id'=>$details['location_ID']));
             $class = ($line%2==1)? ' class="line"' : '';
             echo '<tr'.$class.'>
             <td align="right">'.$details['id'].'</td>
             <td>&nbsp;</td>
             <td>'.$details['invite_name'].'</td>
             <td align="center">';
-                if($details['coming'] == null){
+                if($details['coming'] == -1){
                     echo '***';
                 }else if($details['coming'] == 0){
                     echo 'No';
                 }else if($details['coming'] == 1){
-                    echo $location['location'];
+                    echo $location;
                 }
             echo'</td>
             <td>&nbsp;</td>
             <td align="center" width="50px">'.$details['guest_number'].'</td>
             <td>'.$details['number'].'</td>
             <td>'.$details['address'].'</td>
-            <td align="center"><em style="font-size:18px;">'.$code['code'].'</em></td>';
+            <td align="center"><em style="font-size:18px;">'.$code.'</em></td>';
             update_invite_entry($details['id'], $details['musicSet']);
             echo '</tr>';
-        }while($details = mysql_fetch_assoc($invite_query));
+        }
     }else{
         echo '<tr class="line">
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>***</td>
+            <td align="center">***</td>
+            <td align="center">***</td>
             <td>&nbsp;</td>
             <td>0</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <td align="center">***</td>
         </tr>';
     }
-echo '</table>'; ?>
+echo '</table><br/>'; ?>

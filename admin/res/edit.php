@@ -5,14 +5,11 @@ if(!isset($_SESSION['user'])){
 	header('location:../index.php');
 }
 include_once '../../res/connection.php';
+$db = new pdo_connection("jdenocco_wedding");
 $ID = $_GET['id'];
-$tbl_name = 'details';
-$query = mysql_query("SELECT * FROM $tbl_name WHERE id='$ID'") or die("Entry not found!");
-$details = mysql_fetch_assoc($query);
 
-$tbl_name = 'invites';
-$query = mysql_query("SELECT * FROM $tbl_name WHERE invitee_id='$ID'") or die("Invitee Entry not found!");
-$invites = mysql_fetch_assoc($query);
+$details = $db->getRow("SELECT * FROM details WHERE id=:id", array('id'=>$ID));
+$invites = $db->getRow("SELECT * FROM invites WHERE invitee_id=:id", array('id'=>$ID));
 
 if(!isset($_GET['music'])){
 ?>
@@ -43,20 +40,19 @@ function random_code(){
 		</td>
 	</tr><tr>
 		<td>Coming:&nbsp;&nbsp;</td>
-		<td>N/A<input type="radio" name="coming" <?php if($details['coming']===null){ echo 'checked'; } ?> value="" onclick="hideStuff('location')"/></td>
-		<td align="center">Yes<input type="radio" name="coming" <?php if($details['coming']==='1'){ echo 'checked'; } ?> value="1" onclick="showRow('location')"/></td>
-		<td align="left">No<input type="radio" name="coming" <?php if($details['coming']==='0'){ echo 'checked'; } ?> value="0" onclick="hideStuff('location')"/></td>
+		<td>N/A<input type="radio" name="coming" <?php if($details['coming']==-1) echo 'checked'; ?> value="-1" onclick="hideStuff('location');hideStuff('guests_num')"/></td>
+		<td align="center">Yes<input type="radio" name="coming" <?php if($details['coming']==1) echo 'checked'; ?> value="1" onclick="showRow('location');showRow('guests_num')"/></td>
+		<td align="left">No<input type="radio" name="coming" <?php if($details['coming']==0) echo 'checked'; ?> value="0" onclick="hideStuff('location');hideStuff('guests_num')"/></td>
 	</tr><tr id="location" style="display: <?php echo ($details['coming']!='1') ? 'none' : 'table-row';?>;">
-        <td>Location:</td>
-        <td colspan="2"><select name="location"><?php
-            $location_query = mysql_query("SELECT * FROM location");
-            while($location = mysql_fetch_assoc($location_query)){
+        <td colspan="2">Location:</td>
+        <td><select name="location"><?php
+            foreach($db->getAllRows("SELECT * FROM location") as $location){
                 $select = ($details['location_ID'] == $location['id']) ? 'selected' : '';
                 echo '<option value="'.$location['id'].'" '.$select.'>'.$location['location'].'</option>';
             }
         ?></select></td>
-    </tr><tr>
-		<td colspan="2" align="right">No. of Guests:</td>
+    </tr><tr id="guests_num" style="display: <?php echo ($details['coming']!='1') ? 'none' : 'table-row';?>;">
+		<td colspan="2">No. of Guests:</td>
 		<td>
 			<input type="text" name="guests" value="<?php echo $details['guest_number']; ?>" maxlength="1" size="1" />
 		</td>
@@ -95,13 +91,12 @@ function random_code(){
 </html>
 
 <?php }else{
-$tbl_name = 'music';
-$query = mysql_query("SELECT * FROM $tbl_name WHERE id='$ID'") or die("Entry not found!");
-$music = mysql_fetch_assoc($query);
+$music = $db->getRow("SELECT * FROM music WHERE id=:id", array('id'=>$ID));
 ?>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <body>
-	<table border="0"><form action="res/update.php?music=bnjksbesk&o=fbahjkvgbkasdvbskdv" method="post">
+<form action="res/update.php?music=bnjksbesk&o=fbahjkvgbkasdvbskdv" method="post">
+<table border="0" style="color: #111;">
 	<tr>
 		<td colspan="2" align="center"><h1>Edit Song <?php echo $ID; ?></h1></td>
 	</tr><tr>
@@ -129,9 +124,9 @@ $music = mysql_fetch_assoc($query);
 			<input type="submit" class="button" />
 		</td>
 	</tr>
-	</form></table>
-	<br>
+</table>
+</form>
+<br>
 </body>
 </html>
-<?php } 
-mysql_free_result($query);?>
+<?php } $db->closeConnection(); ?>

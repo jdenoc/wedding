@@ -1,8 +1,5 @@
-<?php // music.php
-$tbl_name = 'music';
-$sql = "SELECT * FROM $tbl_name";
-$music_query = mysql_query($sql);
-$music = mysql_fetch_assoc($music_query);
+<?php // music.php (ADMIN)
+$music_rows = $db->getAllRows("SELECT * FROM music");
 
 function update_music_entry($ID){
 	echo '
@@ -25,31 +22,21 @@ $line = 0;
 		<th width="150px">Album</th>
 	</tr>
 	<tr><td colspan="7"><div class="sexy_line"></div></td></tr>
-	<?php do{ $line++;
+	<?php foreach($music_rows as $music){
+        $line++;
 		echo '<tr';
-		if($line%2==0){
-			echo ' class="line"';
-		}
+        echo ($line%2==0)? ' class="line"' : '';
 		echo '>
 		<td align="right">'.$music['id'].'</td>
 		<td>&nbsp;</td>
 		<td>'.$music['song_title'].'</td>
 		<td align="center">';
-			if($music['song_artist'] == null){
-				echo '***';
-			}else{
-				echo $music['song_artist'];
-			}
+            echo ($music['song_artist'] == null)? '***' : $music['song_artist'];
 		echo'</td>
 		<td align="center">';
-			if($music['song_album'] == null){
-				echo '***';
-			}else{
-				echo $music['song_album'];
-			}
+			echo ($music['song_album'] == null)? '***' : $music['song_album'];
 		echo '</td>';
 		update_music_entry($music['id']);
 		echo '</tr>';
-	}while($music = mysql_fetch_assoc($music_query)); 
-echo '</table>';
-//mysql_free_result($music_query); ?>
+	}
+echo '</table>';?>
