@@ -4,9 +4,7 @@ $db = new pdo_connection('jdenocco_wedding');
 $db->getAllRows("SELECT * FROM info");
 
 $new_info = array();
-echo 'keys:<br/>';
 foreach($_POST as $key=>$entry){
-    echo '<br/><br/>ORIGINAL:'.$key.'  '.$entry.'<br/>';
     $key_explode = explode('_', $key);
     if(is_numeric($key_explode[0])){
         $event = ($key_explode[1]=='event')? $entry : $db->getValue("SELECT `event` FROM info WHERE `id`=:id",
@@ -22,10 +20,9 @@ foreach($_POST as $key=>$entry){
                 'text'=>addslashes($text)),
             array('id'=>$key_explode[0]))
         ){
-            echo '***updated: '.$key_explode[0].'  '.$event.' - '.$type.' - '.$text;
+//            echo '***updated: '.$key_explode[0].'  '.$event.' - '.$type.' - '.$text;
         }
     }else{
-        echo '<br/>To insert: '.($key_explode[1]).' - '.addslashes($entry);
         switch($key_explode[1]){
             case 'event':
                 if($entry != '') $new_info['event'] = addslashes($entry);
@@ -37,14 +34,14 @@ foreach($_POST as $key=>$entry){
                 if($entry != '') $new_info['text'] = addslashes($entry);
                 break;
         }
-        print_r($new_info);
     }
 }
 
 if(!empty($new_info)){
-    $db->insert("info", $new_info);
-    echo 'inserted: ';
-    print_r($new_info);
+    if($db->insert("info", $new_info)){
+//        echo '***inserted';
+//        print_r($new_info);
+    }
 }
 
 $db->closeConnection();

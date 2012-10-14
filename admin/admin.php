@@ -17,31 +17,6 @@ $db = new pdo_connection("jdenocco_wedding");
 <div id="container">
 	<div id="head"><?php include_once 'res/page_header.php'; ?></div>
 	<div id="main">
-<!--		<span style="float:right;padding-right: 30px;">-->
-<!--			<span class="button" style="display:block;">-->
-<!--                <a href="res/upload.php" title="Upload Image" class="inline">Upload Image</a>-->
-<!--            </span><br/>-->
-<!---->
-<!--            --><?php //if(!isset($_GET['display']) || $_GET['display']=='invites'){ ?>
-<!--            <span class="button" style="display:block">-->
-<!--				<a href="admin.php?display=music" title="Change Display">-->
-<!--				Display Music</a>-->
-<!--			</span><br/>-->
-<!--            --><?php //}else { ?>
-<!--			<span class="button" style="display:block;">-->
-<!--				<a href="admin.php?display=invites" title="Change Display" >-->
-<!--				Display Invites</a>-->
-<!--			</span><br/>-->
-<!--            --><?php //} ?>
-<!---->
-<!--            <span class="button" style="display: block;">-->
-<!--				<a href="res/info.php" title="" class="inline">Update Details</a>-->
-<!--			</span><br/>-->
-<!--            <span class="button" style="display:block">-->
-<!--				<a href="res/stats.php" title="Statistics" class="inline">Stats</a>-->
-<!--			</span><br/>-->
-<!---->
-<!--		</span>-->
         <table style="float:right;padding-right: 30px;">
             <tr>
                 <td class="button">
@@ -76,6 +51,7 @@ $db = new pdo_connection("jdenocco_wedding");
 		    include_once 'res/music.php';
         }
 		 ?>
+        <br/><br/>
 	</div>
 </body>
 </html>

@@ -50,7 +50,7 @@ if(isset($_GET['o'])){
             'location_ID'=> (($coming == 1)? $location : -1)
         );
         $where = array('id'=>$ID);
-        print_r($values);
+//        print_r($values);
 
         $subject = 'Invite Update';
         $msg = 'An invite has been updated.<br/>Login to <a href="http://wedding.jdenoc.com/admin"/> to view the change.';
@@ -120,7 +120,6 @@ if(isset($_GET['o'])){
 // *******************************invite code addition*******************************
     if(!isset($_GET['music'])){
         $new_id = $db->getValue("SELECT MAX(id) FROM details");
-        echo $new_id;
         $code = ($_POST['invite_code'] != '')? addslashes($_POST['invite_code']) : '';
         $db->insert($alt_tbl_name, array('code'=>$code, 'invitee_id'=>$new_id));
     }

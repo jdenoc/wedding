@@ -21,9 +21,9 @@ $info_table = array('event', 'type', 'text');
     <?php foreach($info as $i){ ?>
           <tr>
               <td valign="top"><?php echo $i['id']; ?></td>
-              <td valign="top"><input type="input" name="<?php echo $i['id'].'_'.$info_table[0]; ?>" value="<?php echo $i['event']?>"/></td>
-              <td valign="top"><input type="input" name="<?php echo $i['id'].'_'.$info_table[1]; ?>" value="<?php echo $i['type']?>"/></td>
-              <td valign="top"><textarea name="<?php echo $i['id'].'_'.$info_table[2]; ?>"><?php echo $i['text']?></textarea></td>
+              <td valign="top"><input type="input" name="<?php echo $i['id'].'_'.$info_table[0]; ?>" value="<?php echo stripslashes($i['event']); ?>"/></td>
+              <td valign="top"><input type="input" name="<?php echo $i['id'].'_'.$info_table[1]; ?>" value="<?php echo stripslashes($i['type']); ?>"/></td>
+              <td valign="top"><textarea name="<?php echo $i['id'].'_'.$info_table[2]; ?>"><?php echo stripslashes($i['text']); ?></textarea></td>
               <td class="button"><a href="res/update.php?x=hsjbvgdbgh&id=<?php echo $i['id']; ?>&info=bgsgbvfkb" title="Remove Invite" class="inline">Remove</a></td>
           </tr>
     <?php $i++; } ?>
