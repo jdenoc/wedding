@@ -1,0 +1,91 @@
+body{
+    color: #E9E9E9;
+	background: #111;
+}
+
+#head{
+	background: #222;
+}
+
+#head ul li{
+	display: inline-block;
+	font-size:20px;
+	padding: 15px;
+}
+
+#head a:link,
+#head a:visited{
+	color: #e9e9e9;
+    font-family:Tahoma, Geneva, sans-serif;
+	text-decoration: none;
+}
+
+#head a:hover{
+	text-decoration: underline;
+}
+
+#foot ul li{
+	display: inline-block;
+	font-size:10px;
+	font-family:Tahoma, Geneva, sans-serif;
+	padding: 5px;
+}
+
+#foot a:link,
+#foot a:visited,
+#foot a:hover{
+	text-decoration: underline;
+	color: #333;
+}
+
+#admin #main{
+	font-family:Tahoma, Geneva, sans-serif;
+	padding-left: 17px;
+}
+
+#admin #main .line{
+	background: #222;
+}
+
+.text{
+	padding: 20px;
+	font-family: 'Merienda One', cursive;
+	font-size: 14px;
+}
+
+.button{
+	border: 0px solid black ;
+	border-radius: 10px ;
+	-moz-border-radius: 10px ;
+	-webkit-border-radius: 10px ;
+	font-family:"Comic Sans MS", cursive;
+	font-weight:bolder;
+	font-size:14px;
+	cursor:pointer;
+	color:#111;
+	background:#e9e9e9;
+}
+
+.button a:link,
+.button a:visited,
+.button a:hover{
+	text-decoration: none;
+	padding:5px;
+	color:#111;
+}
+
+.sexy_line {
+    margin: 25px 0;
+    height: 2px;
+    background: #111;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(#E9E9E9), to(#e9e9e9), color-stop(50%, #111));
+}
+
+.shadow{
+    /* drop shadow */
+    box-shadow: 0 0 25px 20px white;
+    -moz-box-shadow: 0px 0px 25px 20px white;
+    -webkit-box-shadow: 0px 0px 25px 20px white;
+    border-radius:1px;
+    -moz-border-radius:1px;
+}
