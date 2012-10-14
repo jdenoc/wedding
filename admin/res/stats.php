@@ -33,7 +33,7 @@ $total_songs = count($db->getAllRows("SELECT * FROM music"));
         <th align="left">Total Guests</th>
         <td align="center"><?php echo $guests; ?></td>
 	</tr><tr>
-        <th><br/>RSVP\'s</th>
+        <th><br/>RSVP's</th>
         <th><br/>Total Invites</th>
     </tr><tr>
         <td align="center"><?php echo $rsvp; ?></td>
