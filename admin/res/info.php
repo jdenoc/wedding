@@ -4,11 +4,21 @@ $db = new pdo_connection("jdenocco_wedding");
 $info = $db->getAllRows("SELECT * FROM info");
 $info_table = array('event', 'type', 'text');
 ?>
-<html><body>
+<html>
+<head><style>
+    .center_td{
+        text-align: center;
+    }
+    .top_td{
+        vertical-align: top;
+    }
+</style>
+</head>
+<body>
 <form action="res/update_info.php" method="post">
     <table border="0" style="color: #111;">
         <tr>
-            <td colspan="5" align="center"><h1>Update Info</h1></td>
+            <td colspan="5" class="center_td"><h1>Update Info</h1></td>
         </tr><tr>
         <td colspan="5"><div class="sexy_line"></div></td>
     </tr><tr>
@@ -20,26 +30,25 @@ $info_table = array('event', 'type', 'text');
 
     <?php foreach($info as $i){ ?>
           <tr>
-              <td valign="top"><?php echo $i['id']; ?></td>
-              <td valign="top"><input type="input" name="<?php echo $i['id'].'_'.$info_table[0]; ?>" value="<?php echo stripslashes($i['event']); ?>"/></td>
-              <td valign="top"><input type="input" name="<?php echo $i['id'].'_'.$info_table[1]; ?>" value="<?php echo stripslashes($i['type']); ?>"/></td>
-              <td valign="top"><textarea name="<?php echo $i['id'].'_'.$info_table[2]; ?>"><?php echo stripslashes($i['text']); ?></textarea></td>
-              <td class="button"><a href="res/update.php?x=hsjbvgdbgh&id=<?php echo $i['id']; ?>&info=bgsgbvfkb" title="Remove Invite" class="inline">Remove</a></td>
+              <td class="center_td"><?php echo $i['id']; ?></td>
+              <td class="top_td"><input type="input" name="<?php echo $i['id'].'_'.$info_table[0]; ?>" value="<?php echo stripslashes($i['event']); ?>"/></td>
+              <td class="top_td"><input type="input" name="<?php echo $i['id'].'_'.$info_table[1]; ?>" value="<?php echo stripslashes($i['type']); ?>"/></td>
+              <td class="top_td"><textarea name="<?php echo $i['id'].'_'.$info_table[2]; ?>"><?php echo stripslashes($i['text']); ?></textarea></td>
+              <td class="alt_button"><a href="res/update.php?x=hsjbvgdbgh&id=<?php echo $i['id']; ?>&info=bgsgbvfkb" title="Remove Invite" class="inline">Remove</a></td>
           </tr>
     <?php $i++; } ?>
-        <td>&nbsp;</td>
-    </tr>
+    <tr><td>&nbsp;</td></tr>
     <tr><td colspan="5"><div class="sexy_line"></div></td></tr>
     <tr>
-        <th valign="top">New: </th>
-        <td valign="top"><input type="input" name="<?php echo 'new_'.$info_table[0]; ?>"/></td>
-        <td valign="top"><input type="input" name="<?php echo 'new_'.$info_table[1]; ?>"/></td>
-        <td valign="top"><textarea name="<?php echo 'new_'.$info_table[2]; ?>"></textarea></td>
+        <th class="top_td">New: </th>
+        <td class="top_td"><input type="input" name="<?php echo 'new_'.$info_table[0]; ?>"/></td>
+        <td class="top_td"><input type="input" name="<?php echo 'new_'.$info_table[1]; ?>"/></td>
+        <td class="top_td"><textarea name="<?php echo 'new_'.$info_table[2]; ?>"></textarea></td>
     </tr><tr>
-        <td colspan="5" align="center">
-            <input type="submit" class="button" />
+        <td colspan="5" class="center_td">
+            <input type="submit" class="alt_button" />
         </td>
     </tr>
     </table>
 </form>
-</body></html>
+</body></html><?php $db->closeConnection(); ?>

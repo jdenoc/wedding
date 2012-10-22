@@ -16,7 +16,7 @@ if(isset($_SESSION['user']) && $_SESSION['user'] != ''){
         }
     </script>
 </head>
-<body>
+<body style="padding-top: 75px;">
 <form name="form1" method="post" action="checklogin.php">
 <table width="300" border="0" align="center" cellpadding="0" cellspacing="1"  style="color: #111;background-color: #CCC;">
     <tr>
@@ -29,12 +29,12 @@ if(isset($_SESSION['user']) && $_SESSION['user'] != ''){
 				<th colspan="3" align="left">Member Login</th>
 			</tr>
 			<tr>
-				<td width="78">Username</td>
+				<td width="78"><label for="myusername">Username</label></td>
 				<td width="6">:</td>
 				<td width="294"><input name="myusername" type="text" id="myusername"></td>
 			</tr>
 			<tr>
-				<td>Password</td>
+				<td><label for="mypassword">Password</label></td>
 				<td>:</td>
 				<td><input name="mypassword" type="password" id="mypassword"></td>
 			</tr>

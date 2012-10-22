@@ -42,7 +42,9 @@ if(isset($_POST['proceed'])){
 	<div id="head">
 		<?php include_once "res/page_header.php" ?>
 	</div>
-	<div id="main"><table border="0" class="text">
+	<div id="main">
+        <form action="index.php" method="post">
+        <table border="0" class="text">
 		<tr>
 			<th colspan="2">Welcome<br/><br/></th>
 		</tr>
@@ -51,7 +53,7 @@ if(isset($_POST['proceed'])){
 				If you're here, it means that you have received an invite to our wedding reception party and didn't want to send us your invite in the post.<br/><br/>
 			</td>
 		</tr>
-		<form action="index.php" method="post">
+
 		<?php if($showWarning){
 			echo '<tr style="color:#F00; font-family: tahoma; font-size: 16px;">
 				<th>ATTENTION!!!</th>';
@@ -60,19 +62,21 @@ if(isset($_POST['proceed'])){
             session_destroy();
 		} ?>
 		<tr>
-			<td align="right">Please enter your invite code </td>
-			<td><input type="text" name="invite_code" maxlength="6" /><br/></td>
+			<td align="right"><label for="invite_code">Please enter your invite code </label></td>
+			<td><input type="text" name="invite_code" id="invite_code" maxlength="6" /><br/></td>
 		</tr>
 		<tr>
 			<td align="center" colspan="2"><input type="submit" name="proceed" class="button"/><br/><br/></td>
 		</tr>
-		</form>
+
 		<tr>
 			<td valign="top" colspan="2">This code can be found in your invitation here:</td>
         </tr><tr>
 			<td align="right" colspan="2"><br/><br/><img src="../imgs/find-code.png" alt="invite code" class="shadow"/></td>
 		</tr>
-	</table></div><br/><br/>
+	</table>
+    </form>
+    </div><br/><br/>
 </div>
 </body>
 </html>

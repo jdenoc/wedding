@@ -58,7 +58,7 @@ unset($filename, $_FILES["file"]["size"], $_FILES["file"]["name"], $_FILES["file
 
 
 function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth, $file_name){
-    //imagecreatefromjpg, imagecreatefrompng, imagecreatefromgif, etc. depending on user's uploaded file extension
+// imagecreatefromjpg, imagecreatefrompng, imagecreatefromgif, etc. depending on user's uploaded file extension
     if($type == "image/jpeg" || $type == "image/pjpeg"){
         $img = imagecreatefromjpeg($src);
     }elseif($type == "image/png"){
@@ -70,7 +70,7 @@ function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth, $file_nam
     $original_width = imagesx($img); 	//get width of original image
     $original_height = imagesy($img);	//get height of original image
 
-//determine which side is the longest to use in calculating length of the shorter side, since the longest will be the max size for whichever side is longest.
+// determine which side is the longest to use in calculating length of the shorter side, since the longest will be the max size for whichever side is longest.
     $width = $original_width;
     $height = $original_height;
     echo 'original:'.$width.' x '.$height.'<br/>';
@@ -87,7 +87,7 @@ function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth, $file_nam
     }
     echo 'new:'.$width.' x '.$height.'<br/>';
 
-    //create new image resource to hold the resized image
+    // create new image resource to hold the resized image
     $newimg = imagecreatetruecolor($width,$height);
     $palsize = ImageColorsTotal($img);   // Get palette size for original image
     for ($i = 0; $i < $palsize; $i++){ 	 // Assign color palette to new image
@@ -95,11 +95,11 @@ function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth, $file_nam
         ImageColorAllocate($newimg, $colors['red'], $colors['green'], $colors['blue']);
     }
 
-    //copy original image into new image at new size.
+    // copy original image into new image at new size.
     imagecopyresized($newimg, $img, 0, 0, 0, 0, $width, $height, $original_width, $original_height);
 
 
-    //Have to figure that one out yourself using whatever rules you want.  Can use imagegif() or imagepng() or whatever.
+    // Have to figure that one out yourself using whatever rules you want.  Can use imagegif() or imagepng() or whatever.
     $created = null;
     if($type == "image/jpeg" || $type == "image/pjpeg"){
         $created = imagejpeg($newimg, '../../gallery/'.$dir.$filename, 100); //$output file is the path/filename where you wish to save the file.

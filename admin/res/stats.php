@@ -16,35 +16,35 @@ $total_songs = count($db->getAllRows("SELECT * FROM music"));
 ?>
 <html><body>
 <table border="0" id="stats" style="color:#111">
-	<tr style="font-size:24px">
-		<th colspan="2" align="center" style="text-decoration: underline;">Invites</th>
+	<tr>
+		<th colspan="2" style="text-decoration: underline;font-size:24px">Invites</th>
 	</tr><tr>
         <th colspan="2"><em>Coming</em></th>
     </tr><tr>
-        <th align="left">Ireland</th>
-        <td align="center"><?php echo $coming_ie; ?></td>
+        <th style="text-align: left">Ireland</th>
+        <td style="text-align: center"><?php echo $coming_ie; ?></td>
     </tr><tr>
-        <th align="left">Nebraska</th>
-        <td align="center"><?php echo $coming_ne;?></td>
+        <th style="text-align: left">Nebraska</th>
+        <td style="text-align: center"><?php echo $coming_ne;?></td>
     </tr><tr>
-        <th align="left">Total Coming</th>
-        <td align="center"><?php echo $coming; ?></td>
+        <th style="text-align: left">Total Coming</th>
+        <td style="text-align: center"><?php echo $coming; ?></td>
 	</tr><tr>
-        <th align="left">Total Guests</th>
-        <td align="center"><?php echo $guests; ?></td>
+        <th style="text-align: left">Total Guests</th>
+        <td style="text-align: center"><?php echo $guests; ?></td>
 	</tr><tr>
         <th><br/>RSVP's</th>
         <th><br/>Total Invites</th>
     </tr><tr>
-        <td align="center"><?php echo $rsvp; ?></td>
-        <td align="center"><?php echo $total; ?></td>
+        <td style="text-align: center"><?php echo $rsvp; ?></td>
+        <td style="text-align: center"><?php echo $total; ?></td>
 	</tr><tr>
 		<td colspan="6"><div class="sexy_line"></div></td>
-	</tr><tr style="font-size:24px">
-		<th colspan="2" align="center" style="text-decoration: underline;">Songs</th>
-	<tr>
-		<th colspan="1" align="right">Total:</th>
-		<td align="center"><?php echo $total_songs; ?><br/></td>
+	</tr><tr>
+		<th colspan="2" style="text-align: center; text-decoration: underline; font-size: 24px;">Songs</th>
+	</tr><tr>
+		<th colspan="1" style="text-align: right;">Total:</th>
+		<td style="text-align: center;"><?php echo $total_songs; ?><br/></td>
 	</tr>
 </table>
 </body></html>

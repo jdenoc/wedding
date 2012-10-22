@@ -1,4 +1,4 @@
-<?php // edit.php
+<?php // remove.php (ADMIN)
 session_name('wedding_admin');
 session_start();
 if(!isset($_SESSION['user'])){
@@ -36,16 +36,16 @@ if(isset($_GET['music'])){
 <html><body>
 <form action="res/update.php?<?php echo $url_ext; ?>x=njskbdjbsdjbsjk" method="post">
 <table border="0" style="color:#111">
-	<tr><td colspan="3" align="center"><h1><?php echo 'Delete '.$type.' '.$ID; ?></h1></td></tr>
+	<tr><th colspan="3" style="font-size: 34px;"><?php echo 'Delete '.$type.' '.$ID; ?></th></tr>
 	<tr>
 		<th colspan="3">Are you sure you want to delete this <?php echo $type; ?>?</th>
 	</tr><tr>
 		<td colspan="3"><div class="sexy_line"></div></td>
 	</tr><tr>
-        <td align="center"><?php echo $display ?></td>
-		<td align="right">
+        <td style="text-align:center"><?php echo $display ?></td>
+		<td style="text-align:right">
 			<input type="hidden" value="<?php echo $ID; ?>" name="id" />
-			<input type="submit" value="Yes" class="button" /> 
+			<input type="submit" value="Yes" class="alt_button" />
 		</td>
 		<td>&nbsp;</td>
 	</tr>

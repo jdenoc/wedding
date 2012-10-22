@@ -58,7 +58,7 @@ body{
 }
 
 .button{
-	border: 0px solid black ;
+	border: 0 solid black ;
 	border-radius: 10px ;
 	-moz-border-radius: 10px ;
 	-webkit-border-radius: 10px ;
@@ -70,12 +70,33 @@ body{
 	background:#e9e9e9;
 }
 
+.alt_button{
+    border: 0 solid black ;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    font-family:"Comic Sans MS", cursive;
+    font-weight:bolder;
+    font-size:14px;
+    cursor:pointer;
+    color:#e9e9e9;
+    background:#111111;
+}
+
 .button a:link,
 .button a:visited,
 .button a:hover{
 	text-decoration: none;
 	padding:5px;
-	color:#111;
+	color:#111111;
+}
+
+.alt_button a:link,
+.alt_button a:visited,
+.alt_button a:hover{
+    color: #e9e9e9;
+    text-decoration: none;
+    padding: 3px;
 }
 
 .sexy_line {

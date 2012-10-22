@@ -42,18 +42,18 @@ if(isset($_POST['rsvp_submit'])){
                 echo "Thank you <strong>".$details['invite_name']."</strong> for using this feature.<br/>Please fill in the following information to complete your RSVP.";
             ?></td>
         </tr><tr style="font-family:Tahoma, Geneva, sans-serif;">
-            <td align="right" width="150px">Attending&nbsp;&nbsp;</td>
-            <td width="20px"><input type="radio" name="rsvp" value="1" onclick="showRow('num_of_guests');showRow('guest_location')"/></td>
-            <td align="right" width="250px">Not Attending&nbsp;&nbsp;</td>
-            <td><input type="radio" name="rsvp" value="0" onclick="hideStuff('num_of_guests');hideStuff('guest_location')"/></td>
+            <td align="right" width="150px"><label for="attending">Attending</label>&nbsp;&nbsp;</td>
+            <td width="20px"><input type="radio" name="rsvp" id="attending" value="1" onclick="showRow('num_of_guests');showRow('guest_location')"/></td>
+            <td align="right" width="250px"><label for="not_attending">Not Attending</label>&nbsp;&nbsp;</td>
+            <td><input type="radio" name="rsvp" value="0" id="not_attending" onclick="hideStuff('num_of_guests');hideStuff('guest_location')"/></td>
         </tr><tr id="num_of_guests" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
-            <td colspan="3" align="center">
+            <td colspan="3" align="center"><label>
                 Number of guests attending:
                 <input type="text" name="guests" value="<?php echo $details["guest_number"]; ?>" maxlength="1" size="3" />
-            </td>
+            </label></td>
         </tr><tr id="guest_location" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
             <td>&nbsp;</td>
-            <td colspan="2" align="left">
+            <td colspan="2" align="left"><label>
                 Location:
                 <select name="location"><?php
                     $location = $db->getAllRows("SELECT * FROM location");
@@ -61,7 +61,7 @@ if(isset($_POST['rsvp_submit'])){
                         echo '<option value="'.$item['id'].'">'.$item['location'].'</option>';
                     }
                 ?></select>
-            </td>
+            </label></td>
         </tr>
         <tr>
             <td colspan="4">&nbsp;<hr/>&nbsp;</td>
@@ -75,7 +75,7 @@ if(isset($_POST['rsvp_submit'])){
                 (Note: If we don\'t like the song, then we won\'t be playing it!).<br/>
             </td>
         </tr><tr>
-            <td colspan="4" align="center">
+            <td colspan="4" style="text-align: center">
                 <span class="button"><a href="#music_form" class="inline" title="Select Music">Select Music</a></span>
             </td>
         </tr><tr>

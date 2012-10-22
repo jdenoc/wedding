@@ -19,14 +19,14 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == ''){
             <td colspan="4"><div class="sexy_line"></div></td>
         </tr>
         <tr>
-            <td>Choose an image to upload:</td>
+            <td><label for="file">Choose an image to upload:</label></td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><input type="file" name="file" class="button" /></td>
+            <td><input type="file" name="file" id="file" class="button" /></td>
         </tr>
         <tr>
-            <td>Where would like to upload the image</td>
+            <td><label for="folder">Where would like to upload the image</label></td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><select name="folder">
+            <td><select name="folder" id="folder">
                 <option value="ceremony/">Wedding Ceremony</option>
                 <option value="reception_usa/">Nebraskan Reception</option>
                 <option value="reception_ireland/">Irish Reception</option>
