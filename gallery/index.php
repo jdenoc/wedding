@@ -34,13 +34,13 @@ function fileCount($dir){
     return count(glob($dir . "*.{jpg,png}", GLOB_BRACE));
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <?php include_once('res/header_details.php');?>
 </head>
 <body>
-<div style="background: #222;"><?php include_once('res/page_header.php'); ?></div>
+<header><?php include_once('res/page_header.php'); ?></header>
 <div style="float: left; padding-top: 30px;"><ul>
     <li class="gallery_nav"><a href="index.php?gallery=engagement">Engagement Photos (20)</a></li>
     <li class="gallery_nav"><a href="index.php?gallery=ceremony">Wedding Ceremony (<?php echo fileCount('ceremony/');?>)</a></li>

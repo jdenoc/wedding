@@ -3,24 +3,24 @@ body{
 	background: #111;
 }
 
-#head{
+header{
 	background: #222;
 }
 
-#head ul li{
+header ul li{
 	display: inline-block;
 	font-size:20px;
 	padding: 15px;
 }
 
-#head a:link,
-#head a:visited{
+header a:link,
+header a:visited{
 	color: #e9e9e9;
     font-family:Tahoma, Geneva, sans-serif;
 	text-decoration: none;
 }
 
-#head a:hover{
+header a:hover{
 	text-decoration: underline;
 }
 
@@ -115,6 +115,8 @@ body{
     -moz-border-radius:1px;
 }
 
-.front-link{
-    color: #fff;
+.text a:link,
+.text a:visited,
+.text a:hover{
+    color: #3299bb;
 }

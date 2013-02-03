@@ -10,6 +10,7 @@ function update_music_entry($ID){
 		';
 }
 
+
 $line = 0;
 ?>
 <p>Want to add a song yourself? Then <span class="button">
@@ -39,6 +40,14 @@ $line = 0;
 			echo ($music['song_album'] == null)? '***' : $music['song_album'];
 		echo '</td>';
 		update_music_entry($music['id']);
-		echo '</tr>';
+        echo '<td>';
+        if($music['spotify'] !=''){
+            echo '';
+        }
+        echo '</td></tr>';
+//		echo '<td>
+//		<a href="www.youtube.com/results?search_query='.str_replace(' ', '+', $music['song_artist'].'-'.$music['song_title']).'"><img src="../imgs/youtube.png" alt="Youtube" title="Youtube"/></a>
+//		</td>
+//    </tr>';
 	}
 echo '</table>';?>

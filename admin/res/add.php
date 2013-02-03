@@ -3,7 +3,11 @@ session_name('wedding_admin');
 session_start();
 if(!isset($_SESSION['user'])){
 	header('location:../index.php');
-}?>
+}
+include_once '../../res/connection.php';
+$db = new pdo_connection("jdenocco_wedding");
+
+?>
 
 <html xmlns="http://www.w3.org/1999/html">
 <head><script type="text/javascript">
@@ -58,6 +62,15 @@ function random_code(){
 		<td colspan="3" class="td_center">
 			<textarea name="address" id="address"></textarea>
 		</td>
+	</tr><tr>
+        <td class="td_top">Reception:</td>
+        <td><select name="reception">
+            <option value="-1"></option>
+            <?php
+            foreach($db->getAllRows("SELECT * FROM location") as $location){
+                echo '<option value="'.$location['id'].'">'.$location['location'].'</option>';
+            } ?>
+        </select></td>
 	</tr><tr>
 		<td colspan="4"><div class="sexy_line"></div></td>
 	</tr><tr>

@@ -10,7 +10,7 @@ $db = new pdo_connection("jdenocco_wedding");
 $tbl_name = (isset($_GET['music']))? "music" : "details";
 $alt_tbl_name = 'invites';
 $ID = (isset($_POST['id']))? addslashes($_POST['id']) : '';
-$emails = 'jdenoc@gmail.com, brit.waid@yahoo.com';
+$emails = implode(',', $db->getValue("SELECT email FROM admin"));
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'From: Wedding Site <wedding@jdenoc.com>' . "\r\n";
@@ -30,7 +30,7 @@ if(isset($_GET['o'])){
         $where = array('id'=>$ID);
 
         $subject = 'Music Update';
-        $msg = 'A Song has been updated.<br/>Login to <a href="http://wedding.jdenoc.com/admin"/> and  click on the <strong>Display Music</strong> Button to view the change.';
+        $msg = 'Ths Song "'.$title.'" has been updated.<br/>Login <a href="http://wedding.jdenoc.com/admin"/>HERE</a> and  click on the <strong>Display Music</strong> Button to view the change.';
 		
 	}else{
 // *******************************invite update*******************************
@@ -38,22 +38,24 @@ if(isset($_GET['o'])){
 		$coming = addslashes($_POST['coming']);
         $location = addslashes($_POST['location']);
 		$guests = addslashes($_POST['guests']);
+        $invite_num = addslashes($_POST['invite_num']);
 		$number = addslashes($_POST['number']);
 		$address = addslashes($_POST['address']);
 
         $values = array(
             'invite_name'=>$invite,
+            'invite_number'=>$invite_num,
             'guest_number'=>$guests,
             'number'=> (($number == '')? NULL : $number),
             'address'=> (($address == '')? NULL : $address),
             'coming'=> (($coming == '')? NULL : $coming),
-            'location_ID'=> (($coming == 1)? $location : -1)
+            'location_ID'=> $location
         );
         $where = array('id'=>$ID);
 //        print_r($values);
 
         $subject = 'Invite Update';
-        $msg = 'An invite has been updated.<br/>Login to <a href="http://wedding.jdenoc.com/admin"/> to view the change.';
+        $msg = 'An invite for '.$invite.' has been updated.<br/>Click <a href="http://wedding.jdenoc.com/admin"/>here</a> and login to view the change.';
 // *******************************invite code update*******************************
         $code = $_POST['invite_code'];
         $result = $db->getRow("SELECT * FROM $alt_tbl_name WHERE invitee_id=:id", array('id'=>$ID));
@@ -95,7 +97,7 @@ if(isset($_GET['o'])){
         );
 
         $subject = 'Music Addition';
-        $msg = 'A Song has been added to the music playlist.<br/>Login to <a href="http://wedding.jdenoc.com/admin"/> and  click on the <strong>Display Music</strong> Button to view the new song.';
+        $msg = 'A Song has been added to the music playlist.<br/>Login <a href="http://wedding.jdenoc.com/admin"/>HERE</a> and  click on the <strong>Display Music</strong> Button to view the new song.';
 
 	}else{
 // *******************************invite addition*******************************
@@ -103,18 +105,20 @@ if(isset($_GET['o'])){
 		$guests = addslashes($_POST['guests']);
 		$address = addslashes($_POST['address']);
 		$number = addslashes($_POST['number']);
+        $location = addslashes($_POST['reception']);
 		
         $values = array(
             'invite_name'=>$name,
-            'location_ID'=>-1,
+            'location_ID'=>$location,
             'coming'=>-1,
+            'invite_number'=>$guests,
             'guest_number'=>$guests,
             'number'=>(($number == '')? NULL : $number),
             'address'=>(($address == '')? NULL : $address)
         );
 
         $subject = 'Invite Addition';
-        $msg = 'A new invite has been created.<br/>Login to <a href="http://wedding.jdenoc.com/admin"/> to view the new invitee.';
+        $msg = 'A new invite has been created.<br/>Login <a href="http://wedding.jdenoc.com/admin"/>HERE</a> to view the new invitee.';
     }
     $db->insert($tbl_name, $values);
 // *******************************invite code addition*******************************

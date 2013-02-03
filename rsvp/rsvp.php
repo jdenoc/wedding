@@ -30,38 +30,36 @@ if(isset($_POST['rsvp_submit'])){
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><?php include_once "res/header_details.php" ?></head>
 <body id="rsvp">
 <div id="container">
-    <div id="head"><?php include_once "res/page_header.php" ?></div>
+    <header><?php include_once "res/page_header.php" ?></header>
     <div id="main"><form action="rsvp.php" method="post"><table border="0">
         <tr>
             <td colspan="4" class="text"><?php
                 echo "Thank you <strong>".$details['invite_name']."</strong> for using this feature.<br/>Please fill in the following information to complete your RSVP.";
             ?></td>
         </tr><tr style="font-family:Tahoma, Geneva, sans-serif;">
-            <td align="right" width="150px"><label for="attending">Attending</label>&nbsp;&nbsp;</td>
-            <td width="20px"><input type="radio" name="rsvp" id="attending" value="1" onclick="showRow('num_of_guests');showRow('guest_location')"/></td>
-            <td align="right" width="250px"><label for="not_attending">Not Attending</label>&nbsp;&nbsp;</td>
+            <td style="text-align: right;width:150px"><label for="attending">Attending</label>&nbsp;&nbsp;</td>
+            <td style="width:20px"><input type="radio" name="rsvp" id="attending" value="1" onclick="showRow('num_of_guests');showRow('guest_location')"/></td>
+            <td style="text-align: right;width:250px"><label for="not_attending">Not Attending</label>&nbsp;&nbsp;</td>
             <td><input type="radio" name="rsvp" value="0" id="not_attending" onclick="hideStuff('num_of_guests');hideStuff('guest_location')"/></td>
         </tr><tr id="num_of_guests" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
-            <td colspan="3" align="center"><label>
+            <td colspan="3" style="text-align: center"><label>
                 Number of guests attending:
-                <input type="text" name="guests" value="<?php echo $details["guest_number"]; ?>" maxlength="1" size="3" />
+                <select name="guests"><?php
+                  for($i = 0; $i<=$details["invite_number"]; $i++){
+                      echo '<option value="'.$i.'" '.(($i == $details["invite_number"])? 'SELECTED' : '').'>'.$i.'</option>';
+                  }
+                ?></select>
             </label></td>
         </tr><tr id="guest_location" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
             <td>&nbsp;</td>
-            <td colspan="2" align="left"><label>
-                Location:
-                <select name="location"><?php
-                    $location = $db->getAllRows("SELECT * FROM location");
-                    foreach($location as $item){
-                        echo '<option value="'.$item['id'].'">'.$item['location'].'</option>';
-                    }
-                ?></select>
-            </label></td>
+            <td colspan="2" style="text-align: left">
+                Location: <?php echo $db->getValue("SELECT location FROM location WHERE id=:id", array('id'=>$details['location_ID'])) ?>
+            </td>
         </tr>
         <tr>
             <td colspan="4">&nbsp;<hr/>&nbsp;</td>
@@ -82,7 +80,7 @@ if(isset($_POST['rsvp_submit'])){
             <td colspan="4">&nbsp;<hr/>&nbsp;</td>
         </tr>';}?>
         <tr>
-            <td colspan="4" align="center">
+            <td colspan="4" style="text-align: center">
                 <input type="submit" class="button" name="rsvp_submit" />
                 <span class="button"><a href="res/cancel.php">Cancel</a></span>
             </td>

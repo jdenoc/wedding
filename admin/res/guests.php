@@ -68,14 +68,14 @@ Forgot about someone? Then <span class="button">
                 }else if($details['coming'] == 0){
                     echo 'No';
                 }else if($details['coming'] == 1){
-                    echo $location;
+                    echo 'Yes';
                 }
-            echo'</td>
+            echo'<br/>'.$location.'</td>
             <td>&nbsp;</td>
-            <td style="text-align: center;width:50px">'.$details['guest_number'].'</td>
+            <td style="text-align: center;width:50px">'.$details['guest_number'].' / '.$details['invite_number'].'</td>
             <td>'.$details['number'].'</td>
             <td>'.$details['address'].'</td>
-            <td style="text-align: center;font-size:18px;"><em>'.$code.'</em></td>';
+            <td style="text-align: center;font-size:18px;color: #F50000;"><em>'.$code.'</em></td>';
             update_invite_entry($details['id'], $details['musicSet']);
             echo '</tr>';
         }

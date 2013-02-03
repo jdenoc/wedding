@@ -7,13 +7,13 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == ''){
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html>
 <body>
     <form action="res/upload_file.php" method="post" enctype="multipart/form-data">
     <table border="0" style="color:#111;font-family: tahoma;">
         <tr>
-            <th colspan="4" align="center" style="font-size: 32px;">Upload Image</th>
+            <th colspan="4" style="font-size: 32px;text-align: center">Upload Image</th>
         </tr>
         <tr>
             <td colspan="4"><div class="sexy_line"></div></td>
@@ -35,7 +35,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == ''){
         </tr><tr>
             <td>&nbsp;</td>
         </tr><tr>
-            <td align="center" colspan="3"><input type="submit" value="Upload" class="button" /></td>
+            <td style="text-align: center" colspan="3"><input type="submit" value="Upload" class="button" /></td>
         </tr>
     </table>
     </form>

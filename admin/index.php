@@ -6,7 +6,7 @@ if(isset($_SESSION['user']) && $_SESSION['user'] != ''){
     exit;
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<?php include_once 'res/header_details.php'; ?>
@@ -16,22 +16,22 @@ if(isset($_SESSION['user']) && $_SESSION['user'] != ''){
         }
     </script>
 </head>
-<body style="padding-top: 75px;">
+<body><div style="width:300px; margin: 0 auto;padding-top: 75px">
 <form name="form1" method="post" action="checklogin.php">
-<table width="300" border="0" align="center" cellpadding="0" cellspacing="1"  style="color: #111;background-color: #CCC;">
+<table border="0" style="color: #111;background-color: #CCC; text-align: center; border-spacing:0; border-collapse:collapse; padding: 1px">
     <tr>
         <th colspan="2">Welcome</th>
     </tr>
     <tr>
         <td colspan="2">
-        <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+        <table border="0" style="width: 100%;background-color: #FFF;border-spacing:1; border-collapse:separate;padding: 3px">
 			<tr>
-				<th colspan="3" align="left">Member Login</th>
+				<th colspan="3" style="text-align:left">Member Login</th>
 			</tr>
 			<tr>
-				<td width="78"><label for="myusername">Username</label></td>
-				<td width="6">:</td>
-				<td width="294"><input name="myusername" type="text" id="myusername"></td>
+				<td style="width:78px"><label for="myusername">Username</label></td>
+				<td style="width:6px">:</td>
+				<td style="width:294px"><input name="myusername" type="text" id="myusername"></td>
 			</tr>
 			<tr>
 				<td><label for="mypassword">Password</label></td>
@@ -41,8 +41,8 @@ if(isset($_SESSION['user']) && $_SESSION['user'] != ''){
 			<tr>
 				<td colspan="2">&nbsp;</td>
 				<td>
-                    <input type="submit" name="Submit" value="Login" class="button"/>&nbsp;
-				    <input type="button" value="Return" class="button" onclick="reload()"/>
+                    <input type="submit" name="Submit" value="Login" class="alt_button"/>&nbsp;
+				    <input type="button" value="Return" class="alt_button" onclick="reload()"/>
                 </td>
 			</tr>
 		</table>
@@ -50,4 +50,6 @@ if(isset($_SESSION['user']) && $_SESSION['user'] != ''){
     </tr>
 </table>
 </form>
+    </div>
+</body>
 </html>

@@ -8,14 +8,14 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == ''){
 include_once '../res/connection.php';
 $db = new pdo_connection("jdenocco_wedding");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<?php include_once 'res/header_details.php'; ?>
 </head>
 <body id="admin">
 <div id="container">
-	<div id="head"><?php include_once 'res/page_header.php'; ?></div>
+	<header><?php include_once 'res/page_header.php'; ?></header>
 	<div id="main">
         <?php include_once('res/button_table.php') ?>
 		<h1>WELCOME <?php echo strtoupper($_SESSION['user']); ?> !!!</h1>

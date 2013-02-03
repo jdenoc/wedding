@@ -6,16 +6,16 @@ $db = new pdo_connection("jdenocco_wedding");
 
 $ceremony_address = "Sorry, but you won't get to know this information till the day of the wedding itself.<br/>(Note It'll be in August.)";
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <?php include_once "res/header_details.php" ?>
 </head>
 <body>
 <div id="container">
-    <div id="head">
+    <header>
         <?php include_once "res/page_header.php" ?>
-    </div>
+    </header>
     <div id="main" style="padding-left: 20px;" class="text">
         <p>Want to know all the places we'll be celebrating our wedding events, then this is the place to be.</p>
 <?php

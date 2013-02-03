@@ -7,6 +7,7 @@ if(!isset($_SESSION['user'])){
 include_once '../../res/connection.php';
 $db = new pdo_connection("jdenocco_wedding");
 $ID = $_GET['id'];
+$spotify_link = 'http://...spotify?...';
 
 $details = $db->getRow("SELECT * FROM details WHERE id=:id", array('id'=>$ID));
 $invites = $db->getRow("SELECT * FROM invites WHERE invitee_id=:id", array('id'=>$ID));
@@ -23,6 +24,11 @@ function random_code(){
 	}
 	document.getElementById("code").innerText = str;
 	document.getElementById("hidden-code").value = str;
+}
+
+function change_song(){
+    // TODO - figure out how to change href in this function
+    document.getElementById("listen").setAttribute('href', <?php echo $spotify_link ?>+'');
 }
 </script>
 <style>
@@ -41,7 +47,7 @@ function random_code(){
 </style>
 </head>
 <body>
-<?php if(!isset($_GET['music'])){ ?>
+<?php if(!isset($_GET['music'])){ // ********** Guest UPDATE********** ?>
     <form action="res/update.php?o=fbahjkvgbkasdvbskdv" method="post">
 	<table border="0">
 	<tr>
@@ -55,22 +61,26 @@ function random_code(){
 		</td>
 	</tr><tr>
 		<td>Coming:&nbsp;&nbsp;</td>
-		<td><label>N/A<input type="radio" name="coming" <?php if($details['coming']==-1) echo 'checked'; ?> value="-1" onclick="hideStuff('location');hideStuff('guests_num')"/></label></td>
+		<td><label>N/A<input type="radio" name="coming" <?php if($details['coming']==-1) echo 'checked'; ?> value="-1" "/></label></td>
 		<td class="td_center"><label>Yes<input type="radio" name="coming" <?php if($details['coming']==1) echo 'checked'; ?> value="1" onclick="showRow('location');showRow('guests_num')"/></label></td>
-		<td><label>No<input type="radio" name="coming" <?php if($details['coming']==0) echo 'checked'; ?> value="0" onclick="hideStuff('location');hideStuff('guests_num')"/></label></td>
-	</tr><tr id="location" style="display: <?php echo ($details['coming']!='1') ? 'none' : 'table-row';?>;">
+		<td><label>No<input type="radio" name="coming" <?php if($details['coming']==0) echo 'checked'; ?> value="0" /></label></td>
+	</tr><tr id="location">
         <td colspan="2"><label for="location_select">Location:</label></td>
-        <td><select name="location" id="location_select"><?php
+        <td><select name="location" id="location_select">
+            <option value="-1"></option>
+            <?php
             foreach($db->getAllRows("SELECT * FROM location") as $location){
                 $select = ($details['location_ID'] == $location['id']) ? 'selected' : '';
                 echo '<option value="'.$location['id'].'" '.$select.'>'.$location['location'].'</option>';
             }
         ?></select></td>
-    </tr><tr id="guests_num" style="display: <?php echo ($details['coming']!='1') ? 'none' : 'table-row';?>;">
+    </tr><tr id="guests_num">
 		<td colspan="2"><label for="guests">No. of Guests:</label></td>
 		<td>
 			<input type="text" name="guests" id="guests" value="<?php echo $details['guest_number']; ?>" maxlength="1" size="1" />
-		</td>
+            <span style="font-size: 21px; font-weight: bold"> / </span>
+            <input type="text" name="invite_num" value="<?php echo $details['invite_number']; ?>" maxlength="1" size="1" />
+        </td>
 	</tr><tr>
 		<td colspan="2"><label for="number">Contact Number:</label></td>
 		<td colspan="2">
@@ -104,6 +114,7 @@ function random_code(){
 	<br>
 
 <?php }else{
+// **************** Music Update ****************
 $music = $db->getRow("SELECT * FROM music WHERE id=:id", array('id'=>$ID));
 ?>
 <form action="res/update.php?music=bnjksbesk&o=fbahjkvgbkasdvbskdv" method="post">
@@ -128,6 +139,17 @@ $music = $db->getRow("SELECT * FROM music WHERE id=:id", array('id'=>$ID));
 			<input type="text" name="album" id="album" value="<?php echo $music['song_album']; ?>" maxlength="100" size="30" />
 		</td>
 	</tr><tr>
+    <td><label for="song_choice">Song Choice:</label></td>
+    <td>
+        <select id="song_choice" name="song_choice" onchange="change_song()">
+            <option selected disabled></option>
+            <?php {
+            echo '<option value="[[spotify lookup code">[[Song/Artist name provided]]</option>';
+        } ?>
+        </select>
+        <span class="alt_button"><a href="" id="listen" target="_blank">Listen</a></span>
+    </td>
+</tr><tr>
 		<td>&nbsp;</td>
 	</tr><tr>
 		<td colspan="4" class="td_center">

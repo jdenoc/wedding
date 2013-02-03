@@ -32,16 +32,14 @@ if(isset($_POST['proceed'])){
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<?php include_once "res/header_details.php" ?>
 </head>
 <body>
 <div id="container">
-	<div id="head">
-		<?php include_once "res/page_header.php" ?>
-	</div>
+	<header><?php include_once "res/page_header.php" ?></header>
 	<div id="main">
         <form action="index.php" method="post">
         <table border="0" class="text">
@@ -49,30 +47,30 @@ if(isset($_POST['proceed'])){
 			<th colspan="2">Welcome<br/><br/></th>
 		</tr>
 		<tr>
-			<td colspan="2" width="500px">
+			<td colspan="2" style="width: 500px">
 				If you're here, it means that you have received an invite to our wedding reception party and didn't want to send us your invite in the post.<br/><br/>
 			</td>
 		</tr>
 
 		<?php if($showWarning){
-			echo '<tr style="color:#F00; font-family: tahoma; font-size: 16px;">
+			echo '<tr style="color:#F00; font-family:Tahoma, Geneva, sans-serif; font-size: 16px;">
 				<th>ATTENTION!!!</th>';
 			    echo (empty($code))? '<td>Please enter a value into the Invite code Field below</td>' : '<td>Invite code entry incorrect</td>';
 			echo '</tr>';
             session_destroy();
 		} ?>
 		<tr>
-			<td align="right"><label for="invite_code">Please enter your invite code </label></td>
+			<td style="text-align: right"><label for="invite_code">Please enter your invite code </label></td>
 			<td><input type="text" name="invite_code" id="invite_code" maxlength="6" /><br/></td>
 		</tr>
 		<tr>
-			<td align="center" colspan="2"><input type="submit" name="proceed" class="button"/><br/><br/></td>
+			<td style="text-align: center" colspan="2"><input type="submit" name="proceed" class="button"/><br/><br/></td>
 		</tr>
 
 		<tr>
-			<td valign="top" colspan="2">This code can be found in your invitation here:</td>
+			<td style="vertical-align: top" colspan="2">This code can be found in your invitation here:</td>
         </tr><tr>
-			<td align="right" colspan="2"><br/><br/><img src="../imgs/find-code.png" alt="invite code" class="shadow"/></td>
+			<td style="text-align: right" colspan="2"><br/><br/><img src="../imgs/find-code.png" alt="invite code" class="shadow"/></td>
 		</tr>
 	</table>
     </form>

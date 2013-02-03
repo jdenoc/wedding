@@ -33,6 +33,7 @@ if(isset($_GET['music'])){
     $display = $result['invite_name'];
 }
 ?>
+<!DOCTYPE html>
 <html><body>
 <form action="res/update.php?<?php echo $url_ext; ?>x=njskbdjbsdjbsjk" method="post">
 <table border="0" style="color:#111">

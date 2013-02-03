@@ -5,8 +5,10 @@ if(!isset($_SESSION['invite_ID'])){
 	header('location:../index.php');
 	exit;
 }
+include_once('../../res/connection.php');
+$db = new pdo_connection('jdenocco_wedding');
 
-$emails = 'jdenoc@gmail.com, brit.waid@yahoo.com';
+$emails = implode(', ', $db->getAllRows("SELECT email FROM admin"));
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'From: Wedding Site <wedding@jdenoc.com>' . "\r\n";
@@ -51,10 +53,7 @@ if (empty($s3)){
 }
 
 if($add_song1 || $add_song2 || $add_song3){
-	include_once('../../res/connection.php');
-    $db = new pdo_connection('jdenocco_wedding');
-
-    $msg = '';
+	$msg = '';
 	if($add_song1){
         $db->insert('music', array(
             'song_title'=>$s1,
