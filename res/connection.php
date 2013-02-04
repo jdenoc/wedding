@@ -37,6 +37,21 @@ class pdo_connection{
         return $query->fetchColumn();
     }
 
+    public function getAllValues($stmt, $bind=array()){
+        $query = $this->db->prepare($stmt);
+        $array = array();
+        /*** bind the paramaters ***/
+        foreach($bind as $key=>$item){
+            $query->bindParam(':'.$key, $item, PDO::PARAM_STR);
+        }
+        $query->execute();
+        $rows = $query->rowCount();
+        for($i=0; $i<$rows; $i++){
+            $array[] = $query->fetchColumn();
+        }
+        return $array;
+    }
+
     public function getRow($stmt, $bind=array()){
         $query = $this->db->prepare($stmt);
         /*** bind the paramaters ***/
@@ -51,6 +66,7 @@ class pdo_connection{
     public function insert($tbl_name, $array=array()){
         $values = '';
         foreach($array as $key=>$value){
+            $value = (get_magic_quotes_gpc())? stripslashes($value) : $value;
             $values .= " $key='$value',";
         }
         $values = substr($values, 0, strlen($values)-1);
@@ -61,12 +77,14 @@ class pdo_connection{
     public function update($tbl_name, $array=array(), $whereArray=array()){
         $values = '';
         foreach($array as $key=>$value){
+            $value = (get_magic_quotes_gpc())? stripslashes($value) : $value;
             $values .= " $key='$value',";
         }
         $values = substr($values, 0, strlen($values)-1);
 
         $where = '';
         foreach($whereArray as $key=>$value){
+            $value = (get_magic_quotes_gpc())? stripslashes($value) : $value;
             $where .= " $key=".((isset($value))? "'$value'," : null);
         }
         $where = substr($where, 0, strlen($where)-1);
