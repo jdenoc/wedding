@@ -17,7 +17,7 @@ $db = new pdo_connection("jdenocco_wedding");
 <div id="container">
 	<header><?php include_once 'res/page_header.php'; ?></header>
 	<div id="main">
-        <?php include_once('res/button_table.php') ?>
+        <?php include_once('res/button_table.php') ?><br/>
 		<h1>WELCOME <?php echo strtoupper($_SESSION['user']); ?> !!!</h1>
 		<?php 
         if(!isset($_GET['display']) || $_GET['display']=='invites'){

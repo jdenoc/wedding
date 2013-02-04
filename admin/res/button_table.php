@@ -1,15 +1,14 @@
 <?php // button_table.php (ADMIN) ?>
 <style>
-    .blank{
+    td.blank{
         width: 20px;
+    }
+    td.button{
+        width: 125px;
     }
 </style>
 <table style="float:right;padding-right: 30px;">
     <tr>
-<!--        <td class="button" rowspan="3">-->
-<!--            <a href="res/print.php" title="Print Invite" class="inline">Print Invite</a>-->
-<!--        </td>-->
-        <td class="blank">&nbsp;</td>
         <td class="button">
             <a href="res/upload.php" title="Upload Image" class="inline">Upload Image</a>
         </td>
@@ -26,7 +25,6 @@
     </tr>
     <tr><td class="blank">&nbsp;</td></tr>
     <tr>
-        <td class="blank">&nbsp;</td>
         <td class="button">
             <a href="res/info.php" title="Update Details" class="inline">Update Details</a>
         </td>
@@ -35,4 +33,15 @@
             <a href="res/stats.php" title="Statistics" class="inline">Stats</a>
         </td>
     </tr>
+    <tr><td class="blank">&nbsp;</td></tr>
+    <tr>
+        <td class="button">
+            <a href="http://open.spotify.com/user/1232397745/playlist/3OIcw2VsPKDSKh4femqLRD" title="View Wedding Playlist" target="_blank">View Playlist</a>
+        </td>
+        <td class="blank">&nbsp;</td>
+<!--        <td class="button" rowspan="3">-->
+<!--            <a href="res/print.php" title="Print Invite" class="inline">Print Invite</a>-->
+<!--        </td>-->
+    </tr>
 </table>
+

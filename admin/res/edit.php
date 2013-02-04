@@ -7,7 +7,7 @@ if(!isset($_SESSION['user'])){
 include_once '../../res/connection.php';
 $db = new pdo_connection("jdenocco_wedding");
 $ID = $_GET['id'];
-$spotify_link = 'http://...spotify?...';
+$spotify_link = 'http://ws.spotify.com/search/1/track.json?q=';
 
 $details = $db->getRow("SELECT * FROM details WHERE id=:id", array('id'=>$ID));
 $invites = $db->getRow("SELECT * FROM invites WHERE invitee_id=:id", array('id'=>$ID));
@@ -27,8 +27,9 @@ function random_code(){
 }
 
 function change_song(){
-    // TODO - figure out how to change href in this function
-    document.getElementById("listen").setAttribute('href', <?php echo $spotify_link ?>+'');
+    var songs = document.getElementById("song_choice");
+    var href = songs.options[songs.selectedIndex].value;
+    document.getElementById("listen").setAttribute('href', href);
 }
 </script>
 <style>
@@ -43,6 +44,9 @@ function change_song(){
     }
     table{
         color: #111;
+    }
+    input, select{
+        width: 150px;
     }
 </style>
 </head>
@@ -116,6 +120,22 @@ function change_song(){
 <?php }else{
 // **************** Music Update ****************
 $music = $db->getRow("SELECT * FROM music WHERE id=:id", array('id'=>$ID));
+$music_choices = array();
+$json_array = json_decode(file_get_contents($spotify_link.str_replace(' ', '+', $music['song_title'])));
+$track_count = count($json_array->tracks);
+if($track_count > 0){
+//    $track_count = ($track_count > 10)? 10 : $track_count;
+    for($i=0; $i<$track_count; $i++){
+        $value = $json_array->tracks[$i]->href;
+        $display = $json_array->tracks[$i]->name;
+        $display .= ' - '.$json_array->tracks[$i]->artists[0]->name;
+        $display .= ' ['.$json_array->tracks[$i]->album->name.']';
+        $music_choices[$value] = $display;
+    }
+}else{
+    $music_choices[''] = 'Song not found';
+}
+
 ?>
 <form action="res/update.php?music=bnjksbesk&o=fbahjkvgbkasdvbskdv" method="post">
 <table border="0">
@@ -137,17 +157,19 @@ $music = $db->getRow("SELECT * FROM music WHERE id=:id", array('id'=>$ID));
 		<td><label for="album">Album:</label></td>
 		<td>
 			<input type="text" name="album" id="album" value="<?php echo $music['song_album']; ?>" maxlength="100" size="30" />
+<!--            <span class="alt_button"><a href="" >Search Album</a></span>-->
 		</td>
 	</tr><tr>
     <td><label for="song_choice">Song Choice:</label></td>
     <td>
         <select id="song_choice" name="song_choice" onchange="change_song()">
             <option selected disabled></option>
-            <?php {
-            echo '<option value="[[spotify lookup code">[[Song/Artist name provided]]</option>';
-        } ?>
+            <?php foreach($music_choices as $key=>$value){
+                $selected = ($key == $music['spotify'])? 'selected' : '';
+                echo '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
+            } ?>
         </select>
-        <span class="alt_button"><a href="" id="listen" target="_blank">Listen</a></span>
+        <span class="alt_button"><a href="<?php echo $music['spotify'] ?>" id="listen">Listen</a></span>
     </td>
 </tr><tr>
 		<td>&nbsp;</td>

@@ -10,7 +10,7 @@ $db = new pdo_connection("jdenocco_wedding");
 $tbl_name = (isset($_GET['music']))? "music" : "details";
 $alt_tbl_name = 'invites';
 $ID = (isset($_POST['id']))? addslashes($_POST['id']) : '';
-$emails = implode(',', $db->getValue("SELECT email FROM admin"));
+$emails = implode(',', $db->getAllValues("SELECT email FROM admin"));
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'From: Wedding Site <wedding@jdenoc.com>' . "\r\n";
@@ -21,11 +21,13 @@ if(isset($_GET['o'])){
 		$title = addslashes($_POST['title']);
 		$artist = addslashes($_POST['artist']);
 		$album = addslashes($_POST['album']);
+        $spotify = addslashes($_POST['song_choice']);
 
         $values = array(
             'song_title'=>$title,
             'song_artist'=> (($artist == '')? NULL : $artist),
-            'song_album'=> (($album == '')? NULL : $album)
+            'song_album'=> (($album == '')? NULL : $album),
+            'spotify'=> (($spotify == ''))? NULL : $spotify
         );
         $where = array('id'=>$ID);
 
