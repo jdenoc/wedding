@@ -8,9 +8,9 @@ if(isset($_GET['show']) && $_GET['show']=='irish'){       // Ireland = 1
 $detail_rows = $db->getAllRows("SELECT * FROM details $where");
 
 function update_invite_entry($ID, $set){
-    echo '<td align="center">&nbsp;
-        <span class="button"><a href="res/edit.php?id='.$ID.'" title="Edit Invite" class="inline">Edit</a></span>&nbsp;
-        <span class="button"><a href="res/remove.php?id='.$ID.'" title="Remove Invite" class="inline">Remove</a></span>&nbsp;';
+    echo '<td style="text-align: center">
+        <span class="button"><a href="res/edit.php?id='.$ID.'" title="Edit Invite" class="inline">Edit</a></span><br/>
+        <span class="button"><a href="res/remove.php?id='.$ID.'" title="Remove Invite" class="inline">Remove</a></span>';
     if($set == 1){
         echo '<br/><span class="button"><a href="res/update.php?reset=ngsjkbgvdk&id='.$ID.'" title="Reset Music">Reset Music</a></span>';
     }

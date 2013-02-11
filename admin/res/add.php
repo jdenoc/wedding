@@ -32,58 +32,70 @@ function random_code(){
         text-align: center;
         font-size: 32px;
     }
+    #add_invite input[type="text"],
+    #add_invite input[type="tel"],
+    #add_invite select,
+    #add_invite textarea{
+        width: 150px;
+    }
+    #add_invite input[type="number"]{
+        width: 35px;
+    }
+    #add_song input[type="text"]{
+        width: 150px;
+    }
 </style>
 </head>
 <body>
 <?php if(!isset($_GET['music'])){ ?>
     <form action="res/update.php?add=sbhjksvbdhk" method="post">
-    <table border="0" style="color:#111">
+    <table border="0" style="color:#111" id="add_invite">
 	<tr>
-		<th colspan="4">Add Invite</th>
+		<th colspan="2">Add Invite</th>
 	</tr><tr>
-		<td colspan="4"><div class="sexy_line"></div></td>
+		<td colspan="2"><div class="sexy_line"></div></td>
 	</tr><tr>
 		<td><label for="name">Invitees:</label></td>
-		<td colspan="3">
-			<input type="text" name="name" id="name" maxlength="100" size="25" />
+		<td>
+			<input type="text" name="name" id="name" maxlength="100" />
 		</td>
 	</tr><tr>
 		<td><label for="guests">No. of Guests:</label></td>
 		<td>
-			<input type="text" name="guests" id="guests" maxlength="1" size="1" />
+			<input type="number" name="guests" id="guests" maxlength="1" max="9" min="0" />
 		</td>
 	</tr><tr>
 		<td><label for="number">Contact Number:</label></td>
-		<td colspan="2">
-			<input type="text" name="number" id="number" maxlength="20" />
+		<td>
+			<input type="tel" name="number" id="number" maxlength="20" placeholder="+1 (555) 555-5555" />
 		</td>
 	</tr><tr>
 		<td class="td_top"><label for="address">Address:</label></td>
-		<td colspan="3" class="td_center">
+		<td class="td_center">
 			<textarea name="address" id="address"></textarea>
 		</td>
 	</tr><tr>
-        <td class="td_top">Reception:</td>
-        <td><select name="reception">
-            <option value="-1"></option>
+        <td class="td_top"><label for="reception">Reception:</label></td>
+        <td><select name="reception" id="reception">
+            <option value="-1" disabled selected></option>
             <?php
             foreach($db->getAllRows("SELECT * FROM location") as $location){
                 echo '<option value="'.$location['id'].'">'.$location['location'].'</option>';
             } ?>
         </select></td>
 	</tr><tr>
-		<td colspan="4"><div class="sexy_line"></div></td>
+		<td colspan="2"><div class="sexy_line"></div></td>
 	</tr><tr>
-		<td colspan="4" class="td_center">
+		<td colspan="2" class="td_center">
 			<span id="code" style="font-family:'Comic Sans MS', cursive;font-weight:bold;color:red;">
 			<script>random_code()</script>
 			</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<input type="button" value="Refresh Code" class="alt_button" onclick="random_code()" />
 		</td>
 	</tr><tr>
-		<td>&nbsp;</td>
+		<td colspan="2">&nbsp;</td>
 	</tr><tr>
-		<td colspan="4" class="td_center">
+		<td colspan="2" class="td_center">
 			<input type="hidden" id="hidden-code" name="invite_code"/>
 			<input type="submit" class="alt_button" />
 		</td>
@@ -93,20 +105,20 @@ function random_code(){
 	<br>
 <?php }else{ ?>
     <form action="res/update.php?music=bvhjaskd&add=sbhjksvbdhk" method="post">
-    <table border="0" style="color: #111;">
+    <table border="0" style="color: #111;" id="add_song">
 	<tr>
 		<th colspan="2">Add Song</th>
 	</tr><tr>
 		<td colspan="2"><div class="sexy_line"></div></td>
 	</tr><tr>
 		<td><label for="title">Title:</td>
-		<td><input type="text" name="title" id="title" maxlength="100" size="30" /></td>
+		<td><input type="text" name="title" id="title" maxlength="100" /></td>
 	</tr><tr>
 		<td><label for="artist">Artist:</label></td>
-		<td><input type="text" name="artist" id="artist" maxlength="100" size="30" /></td>
+		<td><input type="text" name="artist" id="artist" maxlength="100" /></td>
 	</tr><tr>
 		<td><label for="album">Album:</label></td>
-		<td><input type="text" name="album" id="album" maxlength="100" size="30" /></td>
+		<td><input type="text" name="album" id="album" maxlength="100" /></td>
 	</tr><tr>
 		<td>&nbsp;</td>
 	</tr><tr>

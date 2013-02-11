@@ -45,32 +45,44 @@ function change_song(){
     table{
         color: #111;
     }
-    input, select{
+    #edit_song input[type="text"],
+    #edit_song select{
         width: 150px;
+    }
+    #edit_guest input[type="text"],
+    #edit_guest input[type="tel"],
+    #edit_guest select,
+    #edit_guest textarea{
+        width: 150px;
+    }
+    #edit_guest input[type="number"]{
+        width: 35px
     }
 </style>
 </head>
 <body>
 <?php if(!isset($_GET['music'])){ // ********** Guest UPDATE********** ?>
-    <form action="res/update.php?o=fbahjkvgbkasdvbskdv" method="post">
-	<table border="0">
+    <form action="res/update.php?o=fbahjkvgbkasdvbskdv" method="post" name="edit_guest">
+	<table border="0" id="edit_guest">
 	<tr>
 		<th colspan="4">Edit Invite <?php echo $ID; ?></th>
 	</tr><tr>
 		<td colspan="4"><div class="sexy_line"></div></td>
 	</tr><tr>
-		<td><label for="name">Invitees:</label></td>
-		<td colspan="3">
-			<input type="text" name="name" id="name" value="<?php echo $details['invite_name']; ?>" maxlength="100" size="25" />
+		<td colspan="2"><label for="name">Invitees:</label></td>
+		<td colspan="2">
+			<input type="text" name="name" id="name" value="<?php echo $details['invite_name']; ?>" maxlength="100" />
 		</td>
 	</tr><tr>
-		<td>Coming:&nbsp;&nbsp;</td>
-		<td><label>N/A<input type="radio" name="coming" <?php if($details['coming']==-1) echo 'checked'; ?> value="-1" "/></label></td>
-		<td class="td_center"><label>Yes<input type="radio" name="coming" <?php if($details['coming']==1) echo 'checked'; ?> value="1" onclick="showRow('location');showRow('guests_num')"/></label></td>
-		<td><label>No<input type="radio" name="coming" <?php if($details['coming']==0) echo 'checked'; ?> value="0" /></label></td>
+		<td colspan="2">Coming:&nbsp;&nbsp;</td>
+		<td colspan="2">
+            <label>N/A<input type="radio" name="coming" <?php if($details['coming']==-1) echo 'checked'; ?> value="-1" "/></label><!--/td-->
+		    <label>Yes<input type="radio" name="coming" <?php if($details['coming']==1) echo 'checked'; ?> value="1" onclick="showRow('location');showRow('guests_num')"/></label>
+		    <label>No<input type="radio" name="coming" <?php if($details['coming']==0) echo 'checked'; ?> value="0" /></label>
+        </td>
 	</tr><tr id="location">
         <td colspan="2"><label for="location_select">Location:</label></td>
-        <td><select name="location" id="location_select">
+        <td colspan="2"><select name="location" id="location_select">
             <option value="-1"></option>
             <?php
             foreach($db->getAllRows("SELECT * FROM location") as $location){
@@ -80,19 +92,19 @@ function change_song(){
         ?></select></td>
     </tr><tr id="guests_num">
 		<td colspan="2"><label for="guests">No. of Guests:</label></td>
-		<td>
-			<input type="text" name="guests" id="guests" value="<?php echo $details['guest_number']; ?>" maxlength="1" size="1" />
+		<td colspan="2">
+			<input type="number" name="guests" id="guests" value="<?php echo $details['guest_number']; ?>" maxlength="1" min="0" max="9" />
             <span style="font-size: 21px; font-weight: bold"> / </span>
-            <input type="text" name="invite_num" value="<?php echo $details['invite_number']; ?>" maxlength="1" size="1" />
+            <input type="number" name="invite_num" value="<?php echo $details['invite_number']; ?>" maxlength="1" min="0" max="9" />
         </td>
 	</tr><tr>
 		<td colspan="2"><label for="number">Contact Number:</label></td>
 		<td colspan="2">
-			<input type="text" name="number" id="number" value="<?php echo $details['number']; ?>" maxlength="20" size="15" />
+			<input type="tel" name="number" id="number" value="<?php echo $details['number']; ?>" maxlength="20" placeholder="+1 (555) 555-5555" />
 		</td>
 	</tr><tr>
-		<td class="td_top"><label for="address">Address:</label></td>
-		<td colspan="3" class="td_center">
+		<td class="td_top" colspan="2"><label for="address">Address:</label></td>
+		<td colspan="2">
 			<textarea name="address" id="address"><?php echo $details['address']; ?></textarea>
 		</td>
 	</tr><tr>
@@ -137,8 +149,8 @@ if($track_count > 0){
 }
 
 ?>
-<form action="res/update.php?music=bnjksbesk&o=fbahjkvgbkasdvbskdv" method="post">
-<table border="0">
+<form action="res/update.php?music=bnjksbesk&o=fbahjkvgbkasdvbskdv" method="post" name="edit_song">
+<table border="0" id="edit_song">
 	<tr>
 		<th colspan="2">Edit Song <?php echo $ID; ?></th>
 	</tr><tr>
@@ -146,18 +158,17 @@ if($track_count > 0){
 	</tr><tr>
 		<td><label for="title">Song:</label></td>
 		<td>
-			<input type="text" name="title" id="title" value="<?php echo $music['song_title']; ?>" maxlength="100" size="30" />
+			<input type="text" name="title" id="title" value="<?php echo $music['song_title']; ?>" maxlength="100" />
 		</td>
 	</tr><tr>
 		<td><label for="artist">Artist:</label></td>
 		<td>
-			<input type="text" name="artist" id="artist" value="<?php echo $music['song_artist']; ?>" maxlength="100" size="30" />
+			<input type="text" name="artist" id="artist" value="<?php echo $music['song_artist']; ?>" maxlength="100" />
 		</td>
 	</tr><tr>
 		<td><label for="album">Album:</label></td>
 		<td>
-			<input type="text" name="album" id="album" value="<?php echo $music['song_album']; ?>" maxlength="100" size="30" />
-<!--            <span class="alt_button"><a href="" >Search Album</a></span>-->
+			<input type="text" name="album" id="album" value="<?php echo $music['song_album']; ?>" maxlength="100" />
 		</td>
 	</tr><tr>
     <td><label for="song_choice">Song Choice:</label></td>
