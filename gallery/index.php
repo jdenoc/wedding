@@ -15,10 +15,11 @@ function engagement(){
 }
 
 function other_events($dir, $title){
+    echo 'DIR:'.$dir;
     $files = scandir($dir);
     $i = 1;
     foreach($files as $file){
-        if(in_array(substr($file, -4), array('.jpg', '.png'))){
+        if(in_array(substr($file, -4), array('.jpg', '.png', '.JPG', '.PNG'))){
             echo '<li>
                 <h3>'.$title.' - Image '.$i.'</h3>
                 <span>'.$dir.$file.'</span>
@@ -31,7 +32,7 @@ function other_events($dir, $title){
 }
 
 function fileCount($dir){
-    return count(glob($dir . "*.{jpg,png}", GLOB_BRACE));
+    return count(glob($dir . "*.{jpg,png,JPG,PNG}", GLOB_BRACE));
 }
 ?>
 <!DOCTYPE html>
@@ -41,25 +42,21 @@ function fileCount($dir){
 </head>
 <body>
 <header><?php include_once('res/page_header.php'); ?></header>
-<div style="float: left; padding-top: 30px;"><ul>
-    <li class="gallery_nav"><a href="index.php?gallery=engagement">Engagement Photos (20)</a></li>
-    <li class="gallery_nav"><a href="index.php?gallery=ceremony">Wedding Ceremony (<?php echo fileCount('ceremony/');?>)</a></li>
-    <li class="gallery_nav"><a href="index.php?gallery=usa">Nebraskan Reception (<?php echo fileCount('reception_usa/');?>)</a></li>
-    <li class="gallery_nav"><a href="index.php?gallery=roi">Irish Reception (<?php echo fileCount('reception_ireland/');?>)</a></li>
-    <li class="gallery_nav"><a href="index.php?gallery=misc">Misc. (<?php echo fileCount('misc/');?>)</a></li>
-</ul></div>
 <ul id="slideshow"><?php
 if(isset($_GET['gallery'])){
-    if($_GET['gallery'] == 'engagement' || !in_array($_GET['gallery'], array('engagement', 'ceremony', 'usa', 'roi', 'misc'))){
+    if($_GET['gallery'] == 'engagement' || !in_array($_GET['gallery'], array('engagement', 'wedding_feb', 'wedding_aug', 'usa', 'roi', 'misc'))){
         engagement();
-    }elseif($_GET['gallery'] == 'ceremony'){
-        $dir = (fileCount('ceremony/') > 0) ? 'ceremony/' : '404/';
-        other_events($dir, 'Wedding Ceremony');
+    }elseif($_GET['gallery'] == 'wedding_feb'){
+        $dir = (fileCount('wedding/feb/') > 0) ? 'wedding/feb/' : '404/';
+        other_events($dir, 'Wedding Ceremony - Feb');
+    }elseif($_GET['gallery'] == 'wedding_aug'){
+        $dir = (fileCount('wedding/aug/') > 0) ? 'wedding/aug/' : '404/';
+        other_events($dir, 'Wedding Ceremony - Aug');
     }elseif($_GET['gallery'] == 'usa'){
-        $dir = (fileCount('reception_usa/') > 0) ? 'reception_usa/' : '404/';
+        $dir = (fileCount('reception/usa/') > 0) ? 'reception/usa/' : '404/';
         other_events($dir, 'Nebraska Reception');
     }elseif($_GET['gallery'] == 'roi'){
-        $dir = (fileCount('reception_ireland/') > 0) ? 'reception_ireland/' : '404/';
+        $dir = (fileCount('reception/ireland/') > 0) ? 'reception/ireland/' : '404/';
         other_events($dir, 'Ireland Reception');
     }elseif($_GET['gallery'] == 'misc'){
         $dir = (fileCount('misc/') > 0) ? 'misc/' : '404/';
@@ -107,7 +104,6 @@ if(isset($_GET['gallery'])){
         slideshow.init("slideshow","image","imgprev","imgnext","imglink");
     }
 </script>
-<p>&nbsp;<br/>&nbsp;</p>
 <p>&nbsp;<br/>&nbsp;</p>
 <p>&nbsp;<br/>&nbsp;</p>
 </body>

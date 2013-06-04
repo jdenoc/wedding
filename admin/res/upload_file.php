@@ -11,11 +11,13 @@ $maxWidth = 500;
 $maxHeight = 300;
 $thumbWidth = 125;
 $thumbHeight = 75;
-$limit = 4*1024*1024;				// 4MB limit on files uploaded
+$limit = 10*1024*1024;				// 10MB limit on files uploaded
 
 if(!isset($_POST['folder']) || $_POST['folder'] == ''){
-    echo '<script type="text/javascript">alert(\'Folder was not selected\')</script>';
-    header("location:../admin.php");
+    echo '<script type="text/javascript">
+            alert(\'Folder was not selected\');
+            window.location = \'../admin.php\';
+        </script>';
     exit;
 }else{
     $dir = $_POST['folder'];
@@ -23,14 +25,12 @@ if(!isset($_POST['folder']) || $_POST['folder'] == ''){
 
 echo '<h1>Upload Summary</h1><br/><br/>';
 
+
 // make sure file is a valid file type, i.e.: jpg, png
-if ((($_FILES["file"]["type"] == "image/jpeg")
-|| ($_FILES["file"]["type"] == "image/pjpeg")	// related to IE only
-|| ($_FILES["file"]["type"] == "image/png"))
-&& ($_FILES["file"]["size"] < $limit)){
+if((in_array($_FILES["file"]["type"], array("image/jpeg", "image/jpg", "image/pjpeg", "image/png"))) && ($_FILES["file"]["size"] < $limit)){
     if ($_FILES["file"]["error"] > 0){
         echo "Error: " . $_FILES["file"]["error"] . "<br />";
-        header("location:admin.php");		// redirect after failed upload
+        echo '<script type="text/javascript">window.location = \'../admin.php\';</script>';
         exit;
     }else{
         // replace any spaces in original filename with underscores
@@ -45,12 +45,14 @@ if ((($_FILES["file"]["type"] == "image/jpeg")
             echo "To: ".$dir."<br/>";
             echo "Size: ".($_FILES["file"]["size"] / 1024)." Kb<br />";
             // create a thumb for the uploaded img with max dimensions 500x300
-            recreate($_FILES["file"]["type"], $_FILES["file"]["tmp_name"], $dir.'/thumbnails/', $filename, $thumbHeight, $thumbWidth, 'Thumbnail');
+            recreate($_FILES["file"]["type"], $_FILES["file"]["tmp_name"], $dir.'thumbnails/', $filename, $thumbHeight, $thumbWidth, 'Thumbnail');
         }
     }
     echo '<br/>You will now be redirected back to the admin page.';
 }else{
-    echo "Invalid file   -   ".$_FILES["file"]["type"];
+    echo "Invalid file   -   ".$_FILES["file"]["type"]."<br/>";
+    echo "Size   -   ".$_FILES["file"]["size"]."<br/>";
+    echo "Name   -   ".$_FILES["file"]["name"]."<br/>";
 }
 echo '<meta http-equiv="Refresh" content="5; URL=../../admin">';	// redirect 5 secs after upload/failure
 // unset $_FILE variables
@@ -87,7 +89,7 @@ function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth, $file_nam
     }
     echo 'new:'.$width.' x '.$height.'<br/>';
 
-    // create new image resource to hold the resized image
+    // create new image resource to hold the re-sized image
     $newimg = imagecreatetruecolor($width,$height);
     $palsize = ImageColorsTotal($img);   // Get palette size for original image
     for ($i = 0; $i < $palsize; $i++){ 	 // Assign color palette to new image
@@ -99,13 +101,22 @@ function recreate($type, $src, $dir, $filename, $maxheight, $maxwidth, $file_nam
     imagecopyresized($newimg, $img, 0, 0, 0, 0, $width, $height, $original_width, $original_height);
 
 
-    // Have to figure that one out yourself using whatever rules you want.  Can use imagegif() or imagepng() or whatever.
     $created = null;
+    make_new_dir("../../gallery/".$dir);
     if($type == "image/jpeg" || $type == "image/pjpeg"){
-        $created = imagejpeg($newimg, '../../gallery/'.$dir.$filename, 100); //$output file is the path/filename where you wish to save the file.
+        $created = imagejpeg($newimg, '../../gallery/'.$dir.strtolower($filename), 100); //$output file is the path/filename where you wish to save the file.
     }elseif($type == "image/png"){
-        $created = imagepng($newimg, '../../gallery/'.$dir.$filename, 9); //$output file is the path/filename where you wish to save the file.
+        $created = imagepng($newimg, '../../gallery/'.$dir.strtolower($filename), 9); //$output file is the path/filename where you wish to save the file.
     }
-    echo $file_name.(($created)? ' Created<br/>' : ' Creation Failed<br/>');
+    echo strtolower($filename).(($created)? ' Created<br/>' : ' Creation Failed<br/>');
 }
-?>
+
+function make_new_dir($path){
+    if(!is_dir($path)){
+        $made = mkdir($path);
+        if(!$made){
+            make_new_dir(substr($path, 0, strrpos($path, '/')));
+            mkdir($path);
+        }
+    }
+}

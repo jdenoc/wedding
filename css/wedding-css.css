@@ -3,14 +3,14 @@ body{
 	background: #111;
 }
 
+ul{ padding: 0; }
+
 header{
 	background: #222;
-}
-
-header ul li{
-	display: inline-block;
-	font-size:20px;
-	padding: 15px;
+    border-radius: 5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius: 5px ;
+    margin: 15px 10px 0;
 }
 
 header a:link,
@@ -68,6 +68,7 @@ header a:hover{
 	cursor:pointer;
 	color:#111;
 	background:#e9e9e9;
+    vertical-align: middle;
 }
 
 .alt_button{
@@ -81,6 +82,7 @@ header a:hover{
     cursor:pointer;
     color:#e9e9e9;
     background:#111111;
+    vertical-align: middle;
 }
 
 .button a:link,
@@ -100,7 +102,7 @@ header a:hover{
 }
 
 .sexy_line {
-    margin: 25px 0;
+    margin: 5px 0;
     height: 2px;
     background: #111;
     background: -webkit-gradient(linear, 0 0, 100% 0, from(#E9E9E9), to(#e9e9e9), color-stop(50%, #111));
@@ -119,4 +121,94 @@ header a:hover{
 .text a:visited,
 .text a:hover{
     color: #3299bb;
+}
+
+#main p{
+    padding-left: 5px;
+}
+
+
+#main_img_block{
+    float: right;
+    padding: 15px 15px 15px 60px;
+    text-align: center;
+}
+
+
+/* ***** Navigation Menu ***** */
+
+.nav{
+    padding: 13px 50px 0;
+    margin: auto;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    height: 30px;
+    font-size: 16px;
+}
+.nav ul{
+    margin:0;
+    list-style:none;
+}
+.nav li{
+    padding: 4px 10px;
+    margin:0;
+}
+.nav li a{
+    color:#FFF;
+    text-decoration:none;
+}
+
+/*--------------------------*\
+	    navigation_menu
+\*--------------------------*/
+#navigation_menu{
+    list-style:none;
+    display: inline;
+    position:relative;
+    z-index:501;
+    margin: 0 auto;
+    text-align: left;
+    text-decoration: none;
+}
+#navigation_menu .nav_li{
+    margin: 10px auto;
+    position:relative;
+    display: inline;
+    cursor: default;
+}
+#navigation_menu ul li a{
+    display:block;
+    padding:5px;
+    color:#fff;
+}
+#navigation_menu .top_link:hover{
+    text-decoration: underline;
+}
+
+/*--- DROPDOWN ---*/
+#navigation_menu ul{
+    list-style:none;
+    position:absolute;
+    left:-9999px; /* Hide off-screen when not needed (this is more accessible than display:none;) */
+}
+#navigation_menu ul li{
+    float:none;
+    padding: 0;
+    margin-left:3px;
+    line-height: 10px;
+    background-color: #222;
+}
+#navigation_menu ul a{
+    white-space:nowrap; /* Stop text wrapping and creating multi-line dropdown items */
+}
+#navigation_menu li:hover ul{ /* Display the dropdown on hover */
+    left:0; /* Bring back on-screen when needed */
+}
+#navigation_menu li:hover ul a{ /* The persistent hover state does however create a global style for links even before they're hovered. Here we undo these effects. */
+    text-decoration:none;
+}
+#navigation_menu li:hover ul li a:hover{ /* Here we define the most explicit hover states--what happens when you hover each individual link. */
+    background:#e9e9e9;
+    color: #111;
 }

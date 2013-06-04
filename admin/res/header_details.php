@@ -2,10 +2,10 @@
 <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="../css/wedding-css.css" />
 <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
-<script type="text/javascript" src="../js/alerts.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="../js/placeholder.js"></script>
 
 <!-- FANCY BOX Setup -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script>
 	!window.jQuery && document.write('<script src="../js/jquery-1.4.3.min.js"><\/script>');
 </script>
@@ -18,3 +18,8 @@
 	});
 </script>
 <!-- END FANCY BOX Set-up -->
+
+<!-- Compatibility for IE 7, 8, 9 -->
+<!--[if IE]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->

@@ -1,36 +1,19 @@
-<style type="text/css">
-    .nav{
-        display: inline-block;
-        font-size:20px;
-        font-family:Tahoma, Geneva, sans-serif;
-        padding: 15px;
-    }
+<div class="nav">
+    <ul id="navigation_menu">
+        <li class="nav_li"><a href="../index.php" class="top_link">Home</a></li>
+        <li class="nav_li"><a href="../rsvp" class="top_link">RSVP</a></li>
+        <li class="nav_li"><a href="index.php">Gallery</a>
+            <ul>
+                <li><a href="index.php?gallery=engagement">Engagement Photos</a></li>
+                <li><a href="index.php?gallery=wedding_feb">Wedding Ceremony Feb</a></li>
+                <li><a href="index.php?gallery=wedding_aug">Wedding Ceremony Aug</a></li>
+                <li><a href="index.php?gallery=usa">Nebraskan Reception</a></li>
+                <li><a href="index.php?gallery=roi">Irish Reception</a></li>
+                <li><a href="index.php?gallery=misc">Misc.</a></li>
+            </ul>
+        </li>
+        <li class="nav_li"><a href="../details.php" class="top_link">Details</a></li>
 
-    .nav a:link,
-    .nav a:visited,
-    .gallery_nav a:visited,
-    .gallery_nav a:link{
-        color: #e9e9e9;
-        text-decoration: none;
-    }
-
-    .gallery_nav a:hover,
-    .nav a:hover{
-        text-decoration: underline;
-    }
-
-    .gallery_nav{
-        list-style: none;
-        font-size:14px;
-        font-family:Tahoma, Geneva, sans-serif;
-        padding: 3px;
-    }
-
-</style>
-<span style="float: right;padding: 10px;font-size: 16px;" class="nav"><a href="../admin">Admin</a></span>
-<ul>
-	<li class="nav"><a href="../">Home</a></li>
-	<li class="nav"><a href="../rsvp">RSVP</a></li>
-	<li class="nav"><a href="../gallery">Gallery</a></li>
-	<li class="nav"><a href="../details.php">Details</a></li>
-</ul>
+        <li style="float: right;"><a href="../admin" class="top_link">Admin</a></li>
+    </ul>
+</div>

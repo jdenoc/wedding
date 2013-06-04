@@ -7,7 +7,7 @@
         width: 125px;
     }
 </style>
-<table style="float:right;padding-right: 30px;">
+<table border="0" style="float:right;padding: 20px 30px 10px 0;">
     <tr>
         <td class="button">
             <a href="res/upload.php" title="Upload Image" class="inline">Upload Image</a>
@@ -23,7 +23,7 @@
         <?php } ?>
         </td>
     </tr>
-    <tr><td class="blank">&nbsp;</td></tr>
+    <tr><td class="blank" colspan="3">&nbsp;</td></tr>
     <tr>
         <td class="button">
             <a href="res/info.php" title="Update Details" class="inline">Update Details</a>
@@ -33,15 +33,11 @@
             <a href="res/stats.php" title="Statistics" class="inline">Stats</a>
         </td>
     </tr>
-    <tr><td class="blank">&nbsp;</td></tr>
+    <tr><td class="blank" colspan="3">&nbsp;</td></tr>
     <tr>
         <td class="button">
             <a href="http://open.spotify.com/user/1232397745/playlist/3OIcw2VsPKDSKh4femqLRD" title="View Wedding Playlist" target="_blank">View Playlist</a>
         </td>
-        <td class="blank">&nbsp;</td>
-<!--        <td class="button" rowspan="3">-->
-<!--            <a href="res/print.php" title="Print Invite" class="inline">Print Invite</a>-->
-<!--        </td>-->
+        <td class="blank" colspan="2">&nbsp;</td>
     </tr>
 </table>
-

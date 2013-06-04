@@ -27,9 +27,11 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == ''){
             <td><label for="folder">Where would like to upload the image</label></td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
             <td><select name="folder" id="folder">
-                <option value="ceremony/">Wedding Ceremony</option>
-                <option value="reception_usa/">Nebraskan Reception</option>
-                <option value="reception_ireland/">Irish Reception</option>
+                <option selected disabled></option>
+                <option value="wedding/feb/">Wedding Ceremony 23-Feb-2013</option>
+                <option value="wedding/aug/">Wedding Ceremony 20-Aug-2013</option>
+                <option value="reception/usa/">Nebraskan Reception</option>
+                <option value="reception/ireland/">Irish Reception</option>
                 <option value="misc/">Misc</option>
             </select></td>
         </tr><tr>

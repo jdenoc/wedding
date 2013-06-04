@@ -1,17 +1,18 @@
 <title>Denis & Britain's Wedding Reception</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="imgs/favicon.ico" type="image/x-icon"/>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Merienda+One'  type='text/css'/>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Handlee' type='text/css'>
 <link rel="stylesheet" href="css/wedding-css.css" type="text/css"/>
-<script type="text/javascript" src="js/alerts.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/placeholder.js"></script>
 
 <!-- FANCY BOX Setup -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script>
-	!window.jQuery && document.write('<script src="../js/jquery-1.4.3.min.js"><\/script>');
+	!window.jQuery && document.write('<script src="js/jquery-1.4.3.min.js"><\/script>');
 </script>
-<script type="text/javascript" src="../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-<link rel="stylesheet" type="text/css" href="../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 <script type="text/javascript">
 	$(document).ready(function() {
 //	inline pop-up for links in "foot" div
@@ -19,3 +20,8 @@
 	});
 </script>
 <!-- END FANCY BOX Set-up -->
+
+<!-- Compatibility for IE 7, 8, 9 -->
+<!--[if IE]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->

@@ -43,9 +43,9 @@ if(isset($_POST['rsvp_submit'])){
             ?></td>
         </tr><tr style="font-family:Tahoma, Geneva, sans-serif;">
             <td style="text-align: right;width:150px"><label for="attending">Attending</label>&nbsp;&nbsp;</td>
-            <td style="width:20px"><input type="radio" name="rsvp" id="attending" value="1" onclick="showRow('num_of_guests');showRow('guest_location')"/></td>
+            <td style="width:20px"><input type="radio" name="rsvp" id="attending" value="1" onclick="$('#num_of_guests').show();$('#guest_location').show();"/></td>
             <td style="text-align: right;width:250px"><label for="not_attending">Not Attending</label>&nbsp;&nbsp;</td>
-            <td><input type="radio" name="rsvp" value="0" id="not_attending" onclick="hideStuff('num_of_guests');hideStuff('guest_location')"/></td>
+            <td><input type="radio" name="rsvp" value="0" id="not_attending" onclick="$('#num_of_guests').hide();$('#guest_location').hide();"/></td>
         </tr><tr id="num_of_guests" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
             <td colspan="3" style="text-align: center"><label>
                 Number of guests attending:
