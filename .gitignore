@@ -1,4 +1,5 @@
 # PHP Storm Files #
+######################
 .idea
 
 # OS generated files #
@@ -11,3 +12,11 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+*~
+*.swp
+
+# Gallery Images #
+######################
+gallery/wedding/*
+gallery/reception/*
+gallery/misc/*
