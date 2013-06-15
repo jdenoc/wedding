@@ -1,5 +1,7 @@
 <title>ADMIN | Denis & Britain's Wedding Reception</title>
-<link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Merienda+One'  type='text/css'/>
+<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Handlee' type='text/css'>
 <link rel="stylesheet" href="../css/wedding-css.css" />
 <link rel="icon" href="../imgs/favicon.ico" type="image/x-icon">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
