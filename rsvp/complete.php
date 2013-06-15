@@ -1,6 +1,6 @@
 <?php // complete.php (rsvp)
 session_name('rsvp');
-session_start();
+@session_start();
 if(!isset($_SESSION['invite_ID'])){
 	header('location:index.php');
     exit;
@@ -23,7 +23,7 @@ if(isset($_GET['x'])){
 <div id="container">
 	<header><?php include_once('res/page_header.php'); ?></header>
 	<div id="main" class="text"><?php
-			session_destroy();
+			@session_destroy();
 			echo $responce;
 	?></div>
 </div>

@@ -58,7 +58,8 @@ if($add_song1 || $add_song2 || $add_song3){
         $db->insert('music', array(
             'song_title'=>$s1,
             'song_artist'=>$a1,
-            'song_album'=>$al1)
+            'song_album'=>$al1,
+            'uploader'=>$_SESSION['invite_ID'])
         );
         $msg .= 'Song: '.$s1.'<br/>Artist: '.$a1.'<br/>Album: '.$al1.'<br/>';
 	}
@@ -66,7 +67,8 @@ if($add_song1 || $add_song2 || $add_song3){
         $db->insert('music', array(
                 'song_title'=>$s2,
                 'song_artist'=>$a2,
-                'song_album'=>$al2)
+                'song_album'=>$al2,
+                'uploader'=>$_SESSION['invite_ID'])
         );
         $msg .= 'Song: '.$s2.'<br/>Artist: '.$a2.'<br/>Album: '.$al2.'<br/>';
 	}
@@ -74,7 +76,8 @@ if($add_song1 || $add_song2 || $add_song3){
         $db->insert('music', array(
                 'song_title'=>$s3,
                 'song_artist'=>$a3,
-                'song_album'=>$al3)
+                'song_album'=>$al3,
+                'uploader'=>$_SESSION['invite_ID'])
         );
         $msg .= 'Song: '.$s3.'<br/>Artist: '.$a3.'<br/>Album: '.$al3.'<br/>';
 	}

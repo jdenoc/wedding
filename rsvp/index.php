@@ -1,6 +1,6 @@
 <?php // index.php (RSVP)
 session_name('rsvp');
-session_start();
+@session_start();
 if(isset($_SESSION['invite_ID'])){
 	header('location:rsvp.php');
 	exit;
@@ -57,7 +57,7 @@ if(isset($_POST['proceed'])){
 				<th>ATTENTION!!!</th>';
 			    echo (empty($code))? '<td>Please enter a value into the Invite code Field below</td>' : '<td>Invite code entry incorrect</td>';
 			echo '</tr>';
-            session_destroy();
+            @session_destroy();
 		} ?>
 		<tr>
 			<td style="text-align: right"><label for="invite_code">Please enter your invite code </label></td>

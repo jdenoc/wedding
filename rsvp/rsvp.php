@@ -1,6 +1,6 @@
 <?php	// rsvp.php (rsvp)
 session_name('rsvp');
-session_start();
+@session_start();
 if(!isset($_SESSION['invite_ID'])){
     header('location:index.php');
     exit;
@@ -14,13 +14,10 @@ $details = $db->getRow("SELECT * FROM details WHERE id=:id", array('id'=>$invite
 if(isset($_POST['rsvp_submit'])){
     if(isset($_POST['rsvp'])){
         if($_POST['rsvp'] == 0){
-            $db->update('details', array('coming'=>0, 'location_ID'=>-1, 'guest_number'=>0), array('id'=>$invite_ID));
+            $db->update('details', array('coming'=>0, 'guest_number'=>0, 'rsvp_date'=>date('Y-m-d')), array('id'=>$invite_ID));
         }elseif($_POST['rsvp'] == 1){
             $no_of_guests = (isset($_POST['guests']) && $_POST['guests'] > 0)? $_POST['guests'] : 1;
-            $loc = (in_array($_POST['location'], array(0,1,2)))? $_POST['location'] : 0;
-            $db->update('details', array('coming'=>1,
-                'guest_number'=>$no_of_guests,
-                'location_ID'=>$loc),
+            $db->update('details', array('coming'=>1, 'guest_number'=>$no_of_guests, 'rsvp_date'=>date('Y-m-d')),
                 array('id'=>$invite_ID)
             );
         }
@@ -47,7 +44,7 @@ if(isset($_POST['rsvp_submit'])){
             <td style="text-align: right;width:250px"><label for="not_attending">Not Attending</label>&nbsp;&nbsp;</td>
             <td><input type="radio" name="rsvp" value="0" id="not_attending" onclick="$('#num_of_guests').hide();$('#guest_location').hide();"/></td>
         </tr><tr id="num_of_guests" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
-            <td colspan="3" style="text-align: center"><label>
+            <td colspan="4" style="text-align: center"><label>
                 Number of guests attending:
                 <select name="guests"><?php
                   for($i = 0; $i<=$details["invite_number"]; $i++){
@@ -56,9 +53,11 @@ if(isset($_POST['rsvp_submit'])){
                 ?></select>
             </label></td>
         </tr><tr id="guest_location" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
-            <td>&nbsp;</td>
-            <td colspan="2" style="text-align: left">
-                Location: <?php echo $db->getValue("SELECT location FROM location WHERE id=:id", array('id'=>$details['location_ID'])) ?>
+            <td style="text-align: right">Location:</td>
+            <td colspan="3" style="text-align: center">
+                <?php $location_details =  $db->getRow("SELECT venue, location FROM location WHERE id=:id", array('id'=>$details['location_ID']));
+                echo $location_details['venue'].', '.$location_details['location'];
+                ?>
             </td>
         </tr>
         <tr>

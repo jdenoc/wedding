@@ -4,14 +4,43 @@ function fillRow($title, $name){
 	echo '<td align="center"><input type="text" name="'.$name.'" maxlength="100" size="40" />';
 }
 ?>
-<style>
+<style type="text/css">
     #show_music1, #show_music2, #show_music3{
         width: 200px;
         text-align: center;
         vertical-align: middle;
     }
 </style>
-<div id="music_form" style="width:550px; height:350px; overflow:auto; padding-left:10px; font-family:'Merienda One', cursive;">
+<script type="text/javascript">
+    function show_second_song(){
+        $('#show_music1').hide();
+        $('#hr1').show();
+        $('#song2').show();
+        $('#art2').show();
+        $('#album2').show();
+        $('#show_music2').show();
+    }
+    function show_third_song(){
+        $('#show_music2').hide();
+        $('#hr2').show();
+        $('#song3').show();
+        $('#art3').show();
+        $('#album3').show();
+    }
+    function reset_music(){
+        $('#show_music1').show();
+        $('#hr1').hide();
+        $('#song2').hide();
+        $('#art2').hide();
+        $('#album2').hide();
+        $('#show_music2').hide();
+        $('#hr2').hide();
+        $('#song3').hide();
+        $('#art3').hide();
+        $('#album3').hide();
+    }
+</script>
+<div id="music_form" style="width:575px; height:350px; overflow:auto; padding-left:10px; font-family:'Merienda One', cursive;">
 <form method="post" action="res/submit_music.php">
 <table border="0" style="color: #111;">
 	<tr>
@@ -25,7 +54,7 @@ function fillRow($title, $name){
 	<tr>
 		<?php fillRow("Song", "song_1"); ?>
 		<td rowspan="3" id="show_music1">
-			<input type="button" value="Add another song" class="button" onclick="hideStuff('show_music1');showRow('hr1');showRow('song2');showRow('art2');showRow('album2');showCell('show_music2')"/>
+			<input type="button" value="Add another song" class="alt_button" onclick="show_second_song()"/>
 		</td>
 	</tr><tr>
 		<?php fillRow("Artist", "artist_1"); ?>
@@ -37,7 +66,7 @@ function fillRow($title, $name){
 	<tr id="song2" style="display:none">
 		<?php fillRow("Song", "song_2"); ?>
 		<td rowspan="3" id="show_music2">
-			<input type="button" value="Add another song" class="button" onclick="hideStuff('show_music2');showRow('hr2');showRow('song3');showRow('art3');showRow('album3');"/>
+			<input type="button" value="Add another song" class="alt_button" onclick="show_third_song()"/>
 		</td>
 	</tr><tr id="art2" style="display:none">
 		<?php fillRow("Artist", "artist_2"); ?>
@@ -58,8 +87,8 @@ function fillRow($title, $name){
 	<!-- SUBMIT -->
 	<tr>
 		<td colspan="3" style="text-align:center">
-			<br/><input type="submit" class="button" value="Submit Song selection" />
-			<input type="reset" class="button" value="Reset Music Selection" onclick="showCell('show_music1');hideStuff('hr1');hideStuff('song2');hideStuff('art2');hideStuff('album2');hideStuff('hr2');hideStuff('song3');hideStuff('art3');hideStuff('album3');"/><br/>
+			<br/><input type="submit" class="alt_button" value="Submit Song selection" />
+			<input type="reset" class="alt_button" value="Reset Music Selection" onclick="reset_music()"/><br/>
 		</td>
 	</tr>
 </table>
