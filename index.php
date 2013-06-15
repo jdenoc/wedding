@@ -32,13 +32,20 @@ $pics = array_merge($pics, glob('gallery/misc/*.{jpg, png}', GLOB_BRACE));
         }
 
         function new_img(){
-            $('#main_img').removeAttr('src').attr('src', pics[getRandNum()]);
+            $('#main_img').fadeOut("slow", function(){
+                console.log('Done fading out');
+                $(this).removeAttr('src').attr('src', pics[getRandNum()]);
+                console.log('img changed');
+                $(this).fadeIn("slow");
+            });
+            setTimeout(new_img, 5000);
         }
 
         $(document).ready(function() {
             //Finish loading the entire page before processing any javascript
             <?php foreach($pics as $pic){ echo "pics.push('".$pic."');\r\n"; } ?>
-            new_img();
+            $('#main_img').attr('src', pics[getRandNum()]).fadeIn("slow");
+            setTimeout(new_img, 5000);
         });
     </script>
 </head>
@@ -47,12 +54,11 @@ $pics = array_merge($pics, glob('gallery/misc/*.{jpg, png}', GLOB_BRACE));
     <header>
         <?php include_once "res/page_header.php" ?>
     </header>
-    <div id="main" class="text" style="padding: 10px;">
+    <div id="main" class="text">
         <div id="main_img_block">
             <img alt="Random image from the whole wedding series" id="main_img" /><br/>
-            <input type="button" onclick="new_img()" value=" &#8635; image " class="button"/>
         </div>
-        <h3>Welcome</h3>
+        <h2>Welcome</h2>
         <p>It seems that you're interested in our <?php echo (date('Y-m-d e') < '2013-08-20 UTC')? 'upcoming' : ''; ?> wedding , if you have received an invite, click on the RSVP link in the Navigation bar above, or click <a href="rsvp">here</a> to RSVP. You can also select up to <span style="font-family:Tahoma, Geneva, sans-serif;">3</span> songs  to be added to the playlist that will be played at out wedding receptions.</p>
         <p>If you want to see some pictures associated with our engagement, wedding or reception parties, then why not head over to the <a href="gallery">gallery</a> page.</p>
         <p>Want to know where we<?php echo (date('Y-m-d e') < '2013-08-20 UTC')? "'re going to have" : "'ve had"; ?> our celebrations, then head on over to the <a href="details.php">details</a> page.</p>

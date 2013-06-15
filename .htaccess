@@ -1,0 +1,25 @@
+#####
+### Redirect user if URL entered is uppercase
+RewriteEngine on
+RewriteBase /wedding
+
+# force url to lowercase if upper case is found
+RewriteCond %{REQUEST_URI} [A-Z]
+# ensure it is not a file on the drive first
+RewriteCond %{REQUEST_FILENAME} !-s
+RewriteRule (.*) res/rewrite-strtolower.php?rewrite_strtolower-url=wedding/$1 [QSA,L]
+#####
+
+#####
+### Display Custom Error Page
+ErrorDocument 400 /wedding/error/error_page.php?type=400:+Bad+Request
+ErrorDocument 401 /wedding/error/error_page.php?type=401:+Unauthorized
+ErrorDocument 403 /wedding/error/error_page.php?type=403:+Forbidden
+ErrorDocument 404 /wedding/error/error_page.php?type=404:+Not+Found
+ErrorDocument 408 /wedding/error/error_page.php?type=408:+Request+Timeout
+ErrorDocument 413 /wedding/error/error_page.php?type=413:+Request+Entity+Too+Large
+ErrorDocument 414 /wedding/error/error_page.php?type=414:+Request+URL+Too+Large
+ErrorDocument 500 /wedding/error/error_page.php?type=500:+Server+Error
+ErrorDocument 503 /wedding/error/error_page.php?type=503:+Out+of+Resources
+ErrorDocument 504 /wedding/error/error_page.php?type=504:+Gateway+Timeout
+#####
