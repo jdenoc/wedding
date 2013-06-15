@@ -7,21 +7,25 @@ $new_info = array();
 foreach($_POST as $key=>$entry){
     $key_explode = explode('_', $key);
     if(is_numeric($key_explode[0])){
-        $event = ($key_explode[1]=='event')? $entry : $db->getValue("SELECT `event` FROM info WHERE `id`=:id",
-            array('id'=>$key_explode[0]));
-        $type = ($key_explode[1]=='type')? $entry : $db->getValue("SELECT `type` FROM info WHERE `id`=:id",
-            array('id'=>$key_explode[0]));
-        $text = ($key_explode[1]=='text')? $entry : $db->getValue("SELECT `text` FROM info WHERE `id`=:id",
-            array('id'=>$key_explode[0]));
+        $event = ($key_explode[1]=='event')? $entry : $db->getValue(
+            "SELECT `event` FROM info WHERE id=:id",
+            array('id'=>$key_explode[0])
+        );
+        $type = ($key_explode[1]=='type')? $entry : $db->getValue(
+            "SELECT `type` FROM info WHERE id=:id",
+            array('id'=>$key_explode[0])
+        );
+        $text = ($key_explode[1]=='text')? $entry : $db->getValue(
+            "SELECT `text` FROM info WHERE id=:id",
+            array('id'=>$key_explode[0])
+        );
 
-        if(  $db->update('info', array(
+        $db->update('info', array(
                 'event'=>addslashes($event),
                 'type'=>addslashes($type),
                 'text'=>addslashes($text)),
-            array('id'=>$key_explode[0]))
-        ){
-//            echo '***updated: '.$key_explode[0].'  '.$event.' - '.$type.' - '.$text;
-        }
+            array('id'=>$key_explode[0])
+        );
     }else{
         switch($key_explode[1]){
             case 'event':
@@ -39,12 +43,9 @@ foreach($_POST as $key=>$entry){
 
 if(!empty($new_info)){
     if($db->insert("info", $new_info)){
-//        echo '***inserted';
-//        print_r($new_info);
     }
 }
 
 $db->closeConnection();
 header("Location: ../admin.php");
 exit;
-?>

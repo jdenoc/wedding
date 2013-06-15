@@ -1,5 +1,9 @@
 <?php // music.php (ADMIN)
-$music_rows = $db->getAllRows("SELECT * FROM music");
+$music_rows = $db->getAllRows("
+    SELECT m.*, IF(d.id=0, 'admin', d.invite_name) AS invite_name
+    FROM music AS m
+    INNER JOIN details AS d ON m.uploader = d.id
+");
 
 function update_music_entry($ID){
 	echo '
@@ -22,8 +26,10 @@ $line = 0;
 		<th style="width: 200px; vertical-align: bottom">Song</th>
 		<th style="width: 150px;">Artist</th>
 		<th style="width: 150px;">Album</th>
+		<th style="width: 100px;">By</th>
+		<th style="width: 150px;">On</th>
 	</tr>
-	<tr><td colspan="7"><div class="sexy_line"></div></td></tr>
+	<tr><td colspan="9"><div class="sexy_line"></div></td></tr>
 	<?php foreach($music_rows as $music){
         $line++;
 		echo '<tr';
@@ -38,6 +44,8 @@ $line = 0;
 		<td style="text-align: center">';
 			echo ($music['song_album'] == null)? '***' : $music['song_album'];
 		echo '</td>';
+        echo '<td style="text-align: center">'.$music['invite_name'].'</td>';
+        echo '<td>'.$music['stamp'].'</td>';
 		update_music_entry($music['id']);
         echo '<td style="text-align: center">';
         if($music['spotify'] !='')
