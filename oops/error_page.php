@@ -2,16 +2,18 @@
 /**
  * Created by: denis
  * Created on: 2013-06-15
+ *
+ * Error page that will be displayed for 400 and 500 errors
  */
 
-$error = str_replace('+', ' ', $_GET['type']);
+$error = (isset($_GET['type'])) ? str_replace('+', ' ', $_GET['type']) : 'OOPS!';
 $msg = 'Error type: '.$error."\r\n";
 $msg .= "URI Accessed: ".$_SERVER['REQUEST_URI']."\r\n";
 $msg .= "Error originated at IP: ".$_SERVER['REMOTE_ADDR']."\r\n";
 mail('wedding@jdenoc.com', 'ERROR', $msg);
 
 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]).'/wedding/';
+$root = realpath($_SERVER["DOCUMENT_ROOT"]).'/';
 $pics = array();
 
 // engagement pictures
@@ -38,7 +40,7 @@ $pics = array_merge($pics, glob($root.'gallery/misc/*.{jpg, png}', GLOB_BRACE));
 <head>
     <title>Denis & Britain's Wedding Reception</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="<?php echo 'http://'.$_SERVER["HTTP_HOST"].'/wedding/imgs/favicon.ico'; ?>" type="image/x-icon"/>
+    <link rel="icon" href="<?php echo 'http://'.$_SERVER["HTTP_HOST"].'/imgs/favicon.ico'; ?>" type="image/x-icon"/>
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Merienda+One' type='text/css'/>
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Handlee' type='text/css'>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
@@ -69,7 +71,7 @@ $pics = array_merge($pics, glob($root.'gallery/misc/*.{jpg, png}', GLOB_BRACE));
         $(document).ready(function() {
             //Finish loading the entire page before processing any javascript here
             <?php foreach($pics as $pic){
-                $pic = str_replace($root, 'http://'.$_SERVER['HTTP_HOST'].'/wedding/', $pic);
+                $pic = str_replace($root, 'http://'.$_SERVER['HTTP_HOST'].'/', $pic);
                 echo "pics.push('".$pic."');\r\n";
             } ?>
             $('#main_img').attr('src', pics[getRandNum()]).fadeIn("slow");
@@ -102,7 +104,7 @@ $pics = array_merge($pics, glob($root.'gallery/misc/*.{jpg, png}', GLOB_BRACE));
     <div id="main">
         <h1><?php echo $error; ?></h1>
         <p>It seems that you've encountered a problem.</p>
-        <p>Click <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/wedding/index.php'; ?>">here</a> to return to the Home.</p>
+        <p>Click <a href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].'/index.php'; ?>">here</a> to return to the Home.</p>
         <p>In the mean time, enjoy this nice picture from the wedding event.</p>
         <br/><br/>
         <div id="main_img_block">
