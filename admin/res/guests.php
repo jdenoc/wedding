@@ -14,7 +14,7 @@ $detail_rows = $db->getAllRows(
 );
 
 function update_invite_entry($ID, $set){
-    echo '<td style="text-align: center">
+    echo '<td style="text-align: center;width:50px">
         <span class="button"><a href="res/edit.php?id='.$ID.'" title="Edit Invite" class="inline">Edit</a></span><br/>
         <span class="button"><a href="res/remove.php?id='.$ID.'" title="Remove Invite" class="inline">Remove</a></span>';
     if($set == 1){
@@ -46,7 +46,7 @@ Forgot about someone? Then <span class="button">
 
 <table border="0">
 	<tr>
-		<th style="vertical-align: bottom;text-align: right;">ID</th>
+		<th style="vertical-align: bottom;text-align: right;width: 35px">ID</th>
 		<td style="vertical-align: bottom;width:10px">&nbsp;</td>
 		<th style="vertical-align: bottom;width:200px">Invitee</th>
 		<th style="vertical-align: bottom;width: 100px">Coming</th>

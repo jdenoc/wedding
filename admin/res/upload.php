@@ -21,7 +21,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == ''){
         <tr>
             <td><label for="file">Choose an image to upload:</label></td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><input type="file" name="file" id="file" class="button" /></td>
+            <td><input type="file" name="file" id="file" class="alt_button" /></td>
         </tr>
         <tr>
             <td><label for="folder">Where would like to upload the image</label></td>
@@ -37,7 +37,7 @@ if(!isset($_SESSION['user']) || $_SESSION['user'] == ''){
         </tr><tr>
             <td>&nbsp;</td>
         </tr><tr>
-            <td style="text-align: center" colspan="3"><input type="submit" value="Upload" class="button" /></td>
+            <td style="text-align: center" colspan="3"><input type="submit" value="Upload" class="alt_button" /></td>
         </tr>
     </table>
     </form>
