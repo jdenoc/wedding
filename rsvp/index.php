@@ -33,7 +33,7 @@ if(isset($_POST['proceed'])){
 ?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 	<?php include_once "res/header_details.php" ?>
 </head>

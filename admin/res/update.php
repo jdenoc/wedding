@@ -149,4 +149,3 @@ $db->closeConnection();
 mail($emails, $subject, $msg, $headers);
 header('location:../admin.php'.((isset($_GET['music']))? '?display=music' : ''));
 exit;
-?>

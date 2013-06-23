@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /imgs/
+Disallow: /admin/
+Disallow: /css/
+Disallow: /fancybox/
+Disallow: /oops/
+Disallow: /oops/
+Disallow: /res/

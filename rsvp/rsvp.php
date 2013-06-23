@@ -21,6 +21,12 @@ if(isset($_POST['rsvp_submit'])){
                 array('id'=>$invite_ID)
             );
         }
+        $to = implode(', ', $db->getAllValues("SELECT email FROM admin"));
+        $hdrs  = 'MIME-Version: 1.0' . "\r\n";
+        $hdrs .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+        $hdrs .= 'From: Wedding Site <wedding@jdenoc.com>' . "\r\n";
+        $msg = 'It seems that '.$details['invite_name'].' has RSVP\'d.<br/>Login <a href="http://wedding.jdenoc.com/admin"/>HERE</a> to see how they responded.';
+        mail($to, 'RSVP', $msg, $hdrs);
         header("Location: complete.php");
         exit;
     }
@@ -28,7 +34,7 @@ if(isset($_POST['rsvp_submit'])){
 ?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head><?php include_once "res/header_details.php" ?></head>
 <body id="rsvp">
 <div id="container">

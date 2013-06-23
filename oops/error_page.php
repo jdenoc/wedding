@@ -36,7 +36,7 @@ $pics = array_merge($pics, glob($root.'gallery/reception/ireland/*.{jpg, png}', 
 $pics = array_merge($pics, glob($root.'gallery/misc/*.{jpg, png}', GLOB_BRACE));
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <title>Denis & Britain's Wedding Reception</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

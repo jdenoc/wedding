@@ -21,7 +21,7 @@ $pics = array_merge($pics, glob('gallery/reception/ireland/*.{jpg, png}', GLOB_B
 $pics = array_merge($pics, glob('gallery/misc/*.{jpg, png}', GLOB_BRACE));
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <?php include_once "res/header_details.php" ?>
 

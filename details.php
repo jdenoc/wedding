@@ -7,7 +7,7 @@ $db = new pdo_connection("jdenocco_wedding");
 $ceremony_address = "Sorry, but you won't get to know this information till the day of the wedding itself.<br/>(Note It'll be in August.)";
 ?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <?php include_once "res/header_details.php" ?>
 </head>
