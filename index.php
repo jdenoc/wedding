@@ -33,9 +33,7 @@ $pics = array_merge($pics, glob('gallery/misc/*.{jpg, png}', GLOB_BRACE));
 
         function new_img(){
             $('#main_img').fadeOut("slow", function(){
-                console.log('Done fading out');
                 $(this).removeAttr('src').attr('src', pics[getRandNum()]);
-                console.log('img changed');
                 $(this).fadeIn("slow");
             });
             setTimeout(new_img, 5000);
@@ -52,7 +50,16 @@ $pics = array_merge($pics, glob('gallery/misc/*.{jpg, png}', GLOB_BRACE));
 <body>
 <div id="container">
     <header>
-        <?php include_once "res/page_header.php" ?>
+        <?php include_once("res/page_header.php");
+        if($detect->isMobile()){
+            echo "<script type=\"text/javascript\">
+                $(document).ready(function(){
+                    $('#main_img_block').appendTo( $('#main') );
+                }
+            );
+            </script>";
+        }
+        ?>
     </header>
     <div id="main" class="text">
         <div id="main_img_block">

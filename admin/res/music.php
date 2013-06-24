@@ -19,7 +19,7 @@ $line = 0;
 <p>Want to add a song yourself? Then <span class="button">
 	<a href="res/add.php?music=vnsjkdv" class="inline" title="Add Invite">click here</a></span> to add it.
 </p>
-<table border="0">
+<table border="0" id="music">
 	<tr>
 		<th style="width: 35px; text-align: right;">ID</th>
 		<td style="width: 10px;">&nbsp;</td>

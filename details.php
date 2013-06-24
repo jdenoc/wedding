@@ -3,8 +3,6 @@ $wedding_date = "2013-08-20 UTC";
 require_once('res/connection.php');
 $db = new pdo_connection("jdenocco_wedding");
 
-
-$ceremony_address = "Sorry, but you won't get to know this information till the day of the wedding itself.<br/>(Note It'll be in August.)";
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,13 +20,14 @@ $ceremony_address = "Sorry, but you won't get to know this information till the 
 $events = $db->getAllRows("SELECT DISTINCT event FROM info ORDER BY event ASC");
 foreach($events as $e){
     echo '<h2>'.stripslashes($e['event']).'</h2>';
-    $info = $db->getAllRows("SELECT `type`, `text` FROM `info` WHERE `event`=:event ORDER BY `type`",
-        array('event'=>$e['event']));
+    $q = ($detect->isMobile()) ? "SELECT type, IF(mobile_content='', content, mobile_content) AS content FROM info WHERE event=:event ORDER BY type" : "SELECT type, content FROM info WHERE event=:event ORDER BY type";
+
+    $info = $db->getAllRows($q, array('event'=>$e['event']));
     foreach($info as $i){
         echo '
         <h3 style="padding-left: 15px;">'.stripslashes($i['type']).'</h3>
         <p style="padding-left: 25px; padding-bottom:10px" class="detail-entry">
-            '.(($e['event']=='Ceremony' && $i['text']=='Location' && date('Y-m-d e') < $wedding_date)? $ceremony_address : stripslashes($i['text'])).'
+            '.stripslashes($i['content']).'
         </p>
         ';
     }

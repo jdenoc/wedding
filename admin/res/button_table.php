@@ -1,13 +1,5 @@
 <?php // button_table.php (ADMIN) ?>
-<style>
-    td.blank{
-        width: 20px;
-    }
-    td.button{
-        width: 125px;
-    }
-</style>
-<table border="0" style="float:right;padding: 20px 30px 10px 0;">
+<table id="button_table" border="0" style="">
     <tr>
         <td class="button">
             <a href="res/upload.php" title="Upload Image" class="inline">Upload Image</a>

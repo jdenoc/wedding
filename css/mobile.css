@@ -1,0 +1,248 @@
+body{
+    color: #E9E9E9;
+    background: #111;
+    width: 380px;
+}
+
+ul{ padding: 0; }
+
+header{
+    background: #222;
+    border-radius: 5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius: 5px ;
+    margin: 15px 10px 0;
+}
+
+header a:link,
+header a:visited{
+    color: #e9e9e9;
+    font-family:Tahoma, Geneva, sans-serif;
+    text-decoration: none;
+}
+
+header a:hover{
+    text-decoration: underline;
+}
+
+#foot ul li{
+    display: inline-block;
+    font-size:10px;
+    font-family:Tahoma, Geneva, sans-serif;
+    padding: 5px;
+}
+
+#foot a:link,
+#foot a:visited,
+#foot a:hover{
+    text-decoration: underline;
+    color: #333;
+}
+
+#admin #main{
+    font-family:Tahoma, Geneva, sans-serif;
+}
+
+#admin #main .line{
+    background: #222;
+}
+
+#admin #button_table{
+    margin: 15px auto -15px;
+}
+
+#admin #music th:first-child,
+#admin #music td:first-child,
+#admin #music td:nth-child(2),
+#admin #music th:nth-child(2),
+#admin #music td:nth-child(n+6),
+#admin #music th:nth-child(n+6),
+#admin #guests th:first-child,
+#admin #guests td:first-child,
+#admin #guests td:nth-child(2),
+#admin #guests th:nth-child(2),
+#admin #guests td:nth-child(5),
+#admin #guests th:nth-child(5),
+#admin #guests td:nth-child(n+7),
+#admin #guests th:nth-child(n+7) {
+    display: none;
+}
+
+#admin #music td:nth-child(8),
+#admin #music th:nth-child(8),
+#admin #guests td:nth-child(10),
+#admin #guests th:nth-child(10) {
+    display: table-cell;
+}
+
+.text{
+    padding: 20px;
+    font-family: 'Merienda One', cursive;
+    font-size: 14px;
+}
+
+.detail-entry{
+    font-family: 'Metrophobic', cursive;
+}
+
+.button{
+    border: 0 solid black ;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    font-family:"Comic Sans MS", cursive;
+    font-weight:bolder;
+    font-size:14px;
+    cursor:pointer;
+    color:#111;
+    background:#e9e9e9;
+    vertical-align: middle;
+}
+
+.alt_button{
+    border: 0 solid black ;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    font-family:"Comic Sans MS", cursive;
+    font-weight:bolder;
+    font-size:14px;
+    cursor:pointer;
+    color:#e9e9e9;
+    background:#111111;
+    vertical-align: middle;
+}
+
+.button a:link,
+.button a:visited,
+.button a:hover{
+    text-decoration: none;
+    padding:5px;
+    color:#111111;
+}
+
+.alt_button a:link,
+.alt_button a:visited,
+.alt_button a:hover{
+    color: #e9e9e9;
+    text-decoration: none;
+    padding: 3px;
+}
+
+.sexy_line {
+    margin: 5px 0;
+    height: 2px;
+    background: #111;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(#E9E9E9), to(#e9e9e9), color-stop(50%, #111));
+}
+
+.shadow{
+    /* drop shadow */
+    box-shadow: 0 0 25px 20px white;
+    -moz-box-shadow: 0px 0px 25px 20px white;
+    -webkit-box-shadow: 0px 0px 25px 20px white;
+    border-radius:1px;
+    -moz-border-radius:1px;
+}
+
+.text a:link,
+.text a:visited,
+.text a:hover{
+    color: #3299bb;
+}
+
+#main{
+    /*padding: 10px;*/
+}
+
+#main p{
+    padding-left: 5px;
+}
+
+
+#main_img_block{
+    text-align: center;
+    height: 300px;
+}
+#main_img_block img{
+    max-width: 300px;
+}
+
+
+
+/* ***** Navigation Menu ***** */
+
+.nav{
+    padding: 10px;
+    margin: auto;
+    font-weight: bold;
+    /*height: 30px;*/
+    font-size: 16px;
+}
+.nav ul{
+    margin:0;
+    list-style:none;
+}
+.nav li{
+
+}
+
+/*--------------------------*\
+	    navigation_menu
+\*--------------------------*/
+.nav #navigation_menu li:nth-child(n+2){
+    display: none;
+}
+
+.nav #navigation_menu #trigger{
+    display: block;
+    float: right;
+    background: transparent url(../imgs/menu_icon.png) no-repeat;
+    width: 24px;
+    height: 21px;
+}
+
+#navigation_menu{
+    list-style:none;
+    display: inline;
+    position:relative;
+    z-index:501;
+    margin: 0 auto;
+    text-align: left;
+    text-decoration: none;
+}
+#navigation_menu .nav_li{
+    margin: 10px auto;
+    position:relative;
+    display: inline;
+    cursor: default;
+}
+#navigation_menu ul li a{
+    display:block;
+    padding:5px;
+    color:#fff;
+}
+
+#navigation_menu ul{
+    list-style:none;
+    position:absolute;
+}
+
+.mobile_nav{
+    position: relative;
+    display: none;
+}
+.mobile_nav ul{
+    background-color: #444;
+    position: absolute;
+    right: 0;
+    top : 10px;
+    list-style: none;
+    font-weight: bold;
+}
+.mobile_nav ul a:link,
+.mobile_nav ul a:visited,
+.mobile_nav ul li{
+    padding: 7px;
+    color: #3299bb;
+}

@@ -41,16 +41,19 @@ if(isset($_POST['rsvp_submit'])){
     <header><?php include_once "res/page_header.php" ?></header>
     <div id="main"><form action="rsvp.php" method="post"><table border="0">
         <tr>
-            <td colspan="4" class="text"><?php
+            <td colspan="5" class="text"><?php
                 echo "Thank you <strong>".$details['invite_name']."</strong> for using this feature.<br/>Please fill in the following information to complete your RSVP.";
             ?></td>
-        </tr><tr style="font-family:Tahoma, Geneva, sans-serif;">
+        </tr>
+        <tr style="font-family:Tahoma, Geneva, sans-serif;">
             <td style="text-align: right;width:150px"><label for="attending">Attending</label>&nbsp;&nbsp;</td>
             <td style="width:20px"><input type="radio" name="rsvp" id="attending" value="1" onclick="$('#num_of_guests').show();$('#guest_location').show();"/></td>
-            <td style="text-align: right;width:250px"><label for="not_attending">Not Attending</label>&nbsp;&nbsp;</td>
-            <td><input type="radio" name="rsvp" value="0" id="not_attending" onclick="$('#num_of_guests').hide();$('#guest_location').hide();"/></td>
-        </tr><tr id="num_of_guests" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
-            <td colspan="4" style="text-align: center"><label>
+            <td>&nbsp</td>
+            <td style="width: 20px"><input type="radio" name="rsvp" value="0" id="not_attending" onclick="$('#num_of_guests').hide();$('#guest_location').hide();"/></td>
+            <td style="text-align: left;width:150px"><label for="not_attending">Not Attending</label>&nbsp;&nbsp;</td>
+        </tr>
+        <tr id="num_of_guests" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
+            <td colspan="5" style="text-align: center"><label>
                 Number of guests attending:
                 <select name="guests"><?php
                   for($i = 0; $i<=$details["invite_number"]; $i++){
@@ -58,34 +61,37 @@ if(isset($_POST['rsvp_submit'])){
                   }
                 ?></select>
             </label></td>
-        </tr><tr id="guest_location" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
+        </tr>
+        <tr id="guest_location" style="display:none;font-family:Tahoma, Geneva, sans-serif;">
             <td style="text-align: right">Location:</td>
-            <td colspan="3" style="text-align: center">
+            <td colspan="4" style="text-align: center">
                 <?php $location_details =  $db->getRow("SELECT venue, location FROM location WHERE id=:id", array('id'=>$details['location_ID']));
                 echo $location_details['venue'].', '.$location_details['location'];
                 ?>
             </td>
         </tr>
         <tr>
-            <td colspan="4">&nbsp;<hr/>&nbsp;</td>
+            <td colspan="5">&nbsp;<hr/>&nbsp;</td>
         </tr>
         <?php if($details['musicSet']==0){
             echo '
         <tr>
-            <td colspan="4" class="text">
+            <td colspan="5" class="text">
                 We are building a playlist of music to celebrate our wedding.<br/>
                 What would you like to hear? Let us know and we\'ll put it on the play list.<br/>
                 (Note: If we don\'t like the song, then we won\'t be playing it!).<br/>
             </td>
-        </tr><tr>
-            <td colspan="4" style="text-align: center">
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align: center">
                 <span class="button"><a href="#music_form" class="inline" title="Select Music">Select Music</a></span>
             </td>
-        </tr><tr>
-            <td colspan="4">&nbsp;<hr/>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="5">&nbsp;<hr/>&nbsp;</td>
         </tr>';}?>
         <tr>
-            <td colspan="4" style="text-align: center">
+            <td colspan="5" style="text-align: center">
                 <input type="submit" class="button" name="rsvp_submit" />
                 <span class="button"><a href="res/cancel.php">Cancel</a></span>
             </td>

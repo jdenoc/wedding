@@ -47,6 +47,18 @@ header a:hover{
 	background: #222;
 }
 
+#admin #button_table{
+    float:right;
+    padding: 20px 30px 10px 0;
+}
+
+#admin #button_table td.blank{
+    width: 20px;
+}
+#admin #button_table td.button{
+    width: 125px;
+}
+
 .text{
 	padding: 20px;
 	font-family: 'Merienda One', cursive;
@@ -168,6 +180,15 @@ header a:hover{
 /*--------------------------*\
 	    navigation_menu
 \*--------------------------*/
+#trigger,
+.mobile_nav{
+    display: none;
+}
+
+.nav #navigation_menu .nav_li:nth-child(5){
+    float: right;
+}
+
 #navigation_menu{
     list-style:none;
     display: inline;
@@ -178,7 +199,6 @@ header a:hover{
     text-decoration: none;
 }
 #navigation_menu .nav_li{
-    margin: 10px auto;
     position:relative;
     display: inline;
     cursor: default;

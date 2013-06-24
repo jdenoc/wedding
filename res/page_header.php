@@ -14,6 +14,12 @@
         </li>
         <li class="nav_li"><a href="details.php" class="top_link">Details</a></li>
 
-        <li style="float: right;"><a href="admin" class="top_link">Admin</a></li>
+        <li class="nav_li"><a href="admin" class="top_link">Admin</a></li>
+        <li id="trigger"></li>
     </ul>
+    <div class="mobile_nav"><ul>
+        <li><a href="rsvp">RSVP</a></li>
+        <li><a href="details.php">Details</a></li>
+        <li><a href="admin">Admin</a></li>
+    </ul></div>
 </div>

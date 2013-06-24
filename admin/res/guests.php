@@ -44,7 +44,7 @@ Forgot about someone? Then <span class="button">
     </label></li>
 </ul>
 
-<table border="0">
+<table border="0" id="guests">
 	<tr>
 		<th style="vertical-align: bottom;text-align: right;width: 35px">ID</th>
 		<td style="vertical-align: bottom;width:10px">&nbsp;</td>

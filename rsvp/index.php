@@ -47,7 +47,7 @@ if(isset($_POST['proceed'])){
 			<th colspan="2">Welcome<br/><br/></th>
 		</tr>
 		<tr>
-			<td colspan="2" style="width: 500px">
+			<td colspan="2">
 				If you're here, it means that you have received an invite to our wedding reception party and didn't want to send us your invite in the post.<br/><br/>
 			</td>
 		</tr>
@@ -60,7 +60,7 @@ if(isset($_POST['proceed'])){
             @session_destroy();
 		} ?>
 		<tr>
-			<td style="text-align: right"><label for="invite_code">Please enter your invite code </label></td>
+			<td style="text-align: right"><label for="invite_code">Please enter your invite code: </label></td>
 			<td><input type="text" name="invite_code" id="invite_code" maxlength="6" /><br/></td>
 		</tr>
 		<tr>
@@ -70,7 +70,7 @@ if(isset($_POST['proceed'])){
 		<tr>
 			<td style="vertical-align: top" colspan="2">This code can be found in your invitation here:</td>
         </tr><tr>
-			<td style="text-align: right" colspan="2"><br/><br/><img src="../imgs/find-code.png" alt="invite code" class="shadow"/></td>
+			<td style="text-align: center" colspan="2"><br/><img src="../imgs/find-code.png" alt="invite code" class="shadow"/></td>
 		</tr>
 	</table>
     </form>

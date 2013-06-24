@@ -105,6 +105,5 @@ if(isset($_GET['gallery'])){
     }
 </script>
 <p>&nbsp;<br/>&nbsp;</p>
-<p>&nbsp;<br/>&nbsp;</p>
 </body>
 </html>
