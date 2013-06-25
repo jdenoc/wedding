@@ -58,6 +58,11 @@ $pics = array_merge($pics, glob('gallery/misc/*.{jpg, png}', GLOB_BRACE));
                 }
             );
             </script>";
+            echo '<style type="text/css">
+                #main p:nth-child(3){
+                    display: none;
+                }
+            </style>';
         }
         ?>
     </header>
