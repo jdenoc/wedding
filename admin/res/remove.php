@@ -16,6 +16,10 @@ if(isset($_GET['music'])){
     $tbl_name = 'info';
     $url_ext = 'info_update=ngaskgb&';
     $type = 'Entry';
+}elseif(isset($_GET['gift'])){
+    $tbl_name = 'gifts';
+    $url_ext = 'gift=ngaskgb&';
+    $type = 'Gift';
 }else{
 	$tbl_name = 'details';
 	$url_ext = '';
@@ -29,6 +33,8 @@ if(isset($_GET['music'])){
     if($result['song_artist'] != null){
         $display .= 'by <em>'.$result['song_artist'].'</em>';
     }
+}elseif(isset($_GET['gift'])){
+    $display = $result['gift'];
 }else{
     $display = $result['invite_name'];
 }

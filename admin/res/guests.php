@@ -14,7 +14,7 @@ $detail_rows = $db->getAllRows(
 );
 
 function update_invite_entry($ID, $set){
-    echo '<td style="text-align: center;width:50px">
+    echo '<td style="">
         <span class="button"><a href="res/edit.php?id='.$ID.'" title="Edit Invite" class="inline">Edit</a></span><br/>
         <span class="button"><a href="res/remove.php?id='.$ID.'" title="Remove Invite" class="inline">Remove</a></span>';
     if($set == 1){
@@ -46,15 +46,15 @@ Forgot about someone? Then <span class="button">
 
 <table border="0" id="guests">
 	<tr>
-		<th style="vertical-align: bottom;text-align: right;width: 35px">ID</th>
-		<td style="vertical-align: bottom;width:10px">&nbsp;</td>
-		<th style="vertical-align: bottom;width:200px">Invitee</th>
-		<th style="vertical-align: bottom;width: 100px">Coming</th>
-		<td style="vertical-align: bottom;width:30px">&nbsp;</td>
-		<th style="vertical-align: bottom;text-align: left;">No. of<br/>Guests</th>
-		<th style="vertical-align: bottom;width:50px">Contact<br/>Number</th>
-		<th style="vertical-align: bottom;width:200px">Address</th>
-		<th style="vertical-align: bottom;width:60px">Code</th>
+        <th>ID</th>
+        <td>&nbsp;</td>
+        <th>Invitee</th>
+		<th>Coming</th>
+		<td>&nbsp;</td>
+		<th>No. of<br/>Guests</th>
+		<th>Contact<br/>Number</th>
+		<th>Address</th>
+		<th>Code</th>
 	</tr>
 	<tr><td colspan="10"><div class="sexy_line"></div></td></tr>
 	<?php
@@ -63,10 +63,10 @@ Forgot about someone? Then <span class="button">
             $line++;
             $class = ($line%2==1)? ' class="line"' : '';
             echo '<tr'.$class.'>
-            <td style="text-align: right">'.$details['id'].'</td>
+            <td>'.$details['id'].'</td>
             <td>&nbsp;</td>
             <td>'.$details['invite_name'].'</td>
-            <td style="text-align: center;">';
+            <td>';
                 if($details['coming'] == -1){
                     echo '***';
                 }else if($details['coming'] == 0){
@@ -76,10 +76,10 @@ Forgot about someone? Then <span class="button">
                 }
             echo'<br/>'.$details['location'].'</td>
             <td>&nbsp;</td>
-            <td style="text-align: center;width:50px">'.$details['guest_number'].' / '.$details['invite_number'].'</td>
+            <td>'.$details['guest_number'].' / '.$details['invite_number'].'</td>
             <td>'.$details['number'].'</td>
             <td>'.$details['address'].'</td>
-            <td style="text-align: center;font-size:18px;color: #F50000;'.(($details['coming'] == 0 || $details['coming'] == 1)? 'text-decoration: line-through;' : '').'"><em>'.$details['code'].'</em></td>';
+            <td style="'.(($details['coming'] == 0 || $details['coming'] == 1)? 'text-decoration: line-through;' : '').'"><em>'.$details['code'].'</em></td>';
             update_invite_entry($details['id'], $details['musicSet']);
             echo '</tr>';
         }

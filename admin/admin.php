@@ -22,8 +22,10 @@ $db = new pdo_connection("jdenocco_wedding");
 		<?php 
         if(!isset($_GET['display']) || $_GET['display']=='invites'){
             include_once 'res/guests.php';
-        }else{
+        }elseif($_GET['display']=='music'){
 		    include_once 'res/music.php';
+        }else{
+            include_once 'res/gifts.php';
         }
 		 ?>
         <br/><br/>

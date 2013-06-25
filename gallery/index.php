@@ -15,11 +15,10 @@ function engagement(){
 }
 
 function other_events($dir, $title){
-    echo 'DIR:'.$dir;
     $files = scandir($dir);
     $i = 1;
     foreach($files as $file){
-        if(in_array(substr($file, -4), array('.jpg', '.png', '.JPG', '.PNG'))){
+        if(in_array(substr($file, -4), array('.jpg', '.png', 'jpeg', '.JPG', '.PNG', 'JPEG'))){
             echo '<li>
                 <h3>'.$title.' - Image '.$i.'</h3>
                 <span>'.$dir.$file.'</span>
@@ -32,7 +31,7 @@ function other_events($dir, $title){
 }
 
 function fileCount($dir){
-    return count(glob($dir . "*.{jpg,png,JPG,PNG}", GLOB_BRACE));
+    return count(glob($dir . "*.{jpg,png,jpeg,JPG,PNG,JPEG}", GLOB_BRACE));
 }
 ?>
 <!DOCTYPE html>

@@ -49,7 +49,7 @@ header a:hover{
 
 #admin #button_table{
     float:right;
-    padding: 20px 30px 10px 0;
+    padding: 5px;
 }
 
 #admin #button_table td.blank{
@@ -58,6 +58,117 @@ header a:hover{
 #admin #button_table td.button{
     width: 125px;
 }
+
+/* ***** Admin Page Table CSS ***** */
+/* *** Guests Table CSS *** */
+#admin #guests th{
+    vertical-align: bottom;
+}
+#admin #guests td:first-child{
+    text-align: right;
+    width: 35px;
+}
+#admin #guests td:nth-child(2){
+    width:10px
+}
+#admin #guests td:nth-child(3),
+#admin #guests td:nth-child(8){
+    width:200px
+}
+#admin #guests td:nth-child(4){
+    width: 100px;
+    text-align: center;
+}
+#admin #guests td:nth-child(5){
+    width: 30px;
+}
+#admin #guests td:nth-child(6),
+#admin #guests td:nth-child(7),
+#admin #guests td:nth-child(10){
+    text-align: center;
+    width:50px;
+}
+#admin #guests td:nth-child(9){
+    width: 60px;
+    text-align: center;
+    font-size:18px;
+    color: #F50000;
+}
+/* *** END - Guests Table CSS *** */
+/* *** Music Table CSS *** */
+#admin #music th{
+    vertical-align: bottom;
+}
+#admin #music td:first-child{
+    text-align: right;
+    width: 35px;
+}
+#admin #music td:nth-child(2){
+    width:10px
+}
+#admin #music td:nth-child(3),
+#admin #music th:nth-child(3){
+    width: 200px;
+}
+#admin #music td:nth-child(4),
+#admin #music td:nth-child(5),
+#admin #music td:nth-child(7){
+    width: 150px;
+    text-align: center
+}
+#admin #music td:nth-child(6){
+    width: 100px;
+    text-align: center
+}
+#admin #music td:nth-child(8){
+    width: 50px;
+    text-align: center;
+}
+
+#admin #guests td:nth-child(9){
+    text-align: center;
+}
+/* *** END - Music Table CSS *** */
+/* *** Gifts Table CSS *** */
+#admin #gifts{
+    margin-top: 10px;
+}
+#admin #gifts th{
+    vertical-align: bottom;
+}
+#admin #gifts td:first-child{
+    text-align: right;
+    width: 35px;
+}
+#admin #gifts td:nth-child(2){
+    width:10px
+}
+#admin #gifts td:nth-child(3){
+    width: 100px;
+    text-align: center;
+}
+#admin #gifts td:nth-child(4){
+    width:200px;
+    text-align: left;
+}
+#admin #gifts td:nth-child(5){
+    width: 30px;
+}
+#admin #gifts td:nth-child(6){
+    text-align: center;
+}
+#admin #gifts td:nth-child(7){
+    text-align: center;
+    width:150px;
+}
+#admin #gifts td:nth-child(8){
+    text-align: center;
+    width:50px;
+}
+/* *** END - Gifts Table CSS *** */
+/* ***** END - Admin Page Table CSS ***** */
+
+
 
 .text{
 	padding: 20px;

@@ -7,7 +7,6 @@ Disallow: /gallery/engagement/
 Disallow: /gallery/res/
 Disallow: /gallery/Slideshow/
 Disallow: /gallery/wedding/
-Disallow: /imgs/
 Disallow: /js/
 Disallow: /oops/
 Disallow: /rsvp/res/

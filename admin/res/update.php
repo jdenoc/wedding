@@ -7,7 +7,7 @@ if(!isset($_SESSION['user'])){
 }
 include_once '../../res/connection.php';
 $db = new pdo_connection("jdenocco_wedding");
-$tbl_name = (isset($_GET['music']))? "music" : "details";
+$tbl_name = (isset($_GET['music']))? "music" : ((isset($_GET['gift']))? "gifts" : "details");
 $alt_tbl_name = 'invites';
 $ID = (isset($_POST['id']))? addslashes($_POST['id']) : '';
 $emails = implode(',', $db->getAllValues("SELECT email FROM admin"));
@@ -33,8 +33,26 @@ if(isset($_GET['o'])){
 
         $subject = 'Music Update';
         $msg = 'Ths Song "'.$title.'" has been updated.<br/>Login <a href="http://wedding.jdenoc.com/admin"/>HERE</a> and  click on the <strong>Display Music</strong> Button to view the change.';
-		
-	}else{
+
+    }elseif(isset($_GET['gift'])){
+// *******************************gift update*******************************
+        $gift_giver = addslashes($_POST['giver']);
+        $gift = addslashes($_POST['gift']);
+        $thanked = addslashes($_POST['thanked']);
+        $thanked_stamp = ($thanked == 0) ? '0000-00-00' : date('Y-m-d', strtotime($_POST['thanked_stamp']));
+
+        $values = array(
+            'gift_giver'=> $gift_giver,
+            'gift'=> $gift,
+            'thanked'=> $thanked,
+            'thanked_stamp'=>$thanked_stamp
+        );
+        $where = array('id'=>$ID);
+
+        $subject = 'Gift Update';
+        $msg = 'Ths Gift "'.$gift.'" has been updated.<br/>Login <a href="http://wedding.jdenoc.com/admin"/>HERE</a> and click on the <strong>Display Gifts</strong> Button to view the change.';
+
+    } else {
 // *******************************invite update*******************************
 		$invite = addslashes($_POST['name']);
 		$coming = addslashes($_POST['coming']);
@@ -76,12 +94,12 @@ if(isset($_GET['o'])){
         $ID = $_GET['id'];
     }
     $db->delete($tbl_name, array('id'=>$ID));
-    if(!isset($_GET['music']) && !isset($_GET['info'])){
+    if(!isset($_GET['music']) && !isset($_GET['info']) && !isset($_GET['gift'])){
 // *******************************invite code delete*******************************
         $db->delete($alt_tbl_name, array('invitee_id'=>$ID));
     }
-    $subject = (($tbl_name=='music')? 'Music' : 'Invite').' Delete';
-    $msg = 'A'.(($tbl_name=='music')? ' Song' : 'n Invite').' has been deleted by '.$_SESSION['user'];
+    $subject = (($tbl_name=='music')? 'Music' : ((isset($_GET['gift']))? 'Gift' : 'Invite')).' Delete';
+    $msg = 'A'.(($tbl_name=='music')? ' Song' : ((isset($_GET['gift']))? 'Gift' : 'n Invite')).' has been deleted by '.$_SESSION['user'];
 
 
 
@@ -101,7 +119,21 @@ if(isset($_GET['o'])){
         $subject = 'Music Addition';
         $msg = 'A Song has been added to the music playlist.<br/>Login <a href="http://wedding.jdenoc.com/admin"/>HERE</a> and  click on the <strong>Display Music</strong> Button to view the new song.';
 
-	}else{
+    }elseif(isset($_GET['gift'])){
+// *******************************gift addition*******************************
+        $gift_giver = addslashes($_POST['giver']);
+        $gift = addslashes($_POST['gift']);
+        $thanked = addslashes($_POST['thank']);
+
+        $values = array(
+            'gift_giver'=> $gift_giver,
+            'gift'=> $gift,
+            'thanked'=> $thanked
+        );
+        $subject = 'Gift Addition';
+        $msg = 'A Gift has been added to the Gifts Display.<br/>Login <a href="http://wedding.jdenoc.com/admin"/>HERE</a> and  click on the <strong>Display Gift</strong> Button to view the new gift.';
+
+    }else{
 // *******************************invite addition*******************************
 		$name = addslashes($_POST['name']);
 		$guests = addslashes($_POST['guests']);
@@ -147,5 +179,5 @@ if(isset($_GET['o'])){
 
 $db->closeConnection();
 mail($emails, $subject, $msg, $headers);
-header('location:../admin.php'.((isset($_GET['music']))? '?display=music' : ''));
+header('location:../admin.php'.((isset($_GET['music']))? '?display=music' : ((isset($_GET['gift']))? '?display=gift' : '')));
 exit;

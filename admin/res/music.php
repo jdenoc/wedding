@@ -7,7 +7,7 @@ $music_rows = $db->getAllRows("
 
 function update_music_entry($ID){
 	echo '
-		<td style="text-align:center; width:50px">
+		<td>
 		    <span class="button"><a href="res/edit.php?id='.$ID.'&music=bhsjvbshjes" title="Edit Song" class="inline">Edit</a></span>&nbsp;
 		    <span class="button"><a href="res/remove.php?id='.$ID.'&music=bvshjdbvgehj" title="Remove Song" class="inline">Remove</a></span>
         </td>
@@ -21,33 +21,27 @@ $line = 0;
 </p>
 <table border="0" id="music">
 	<tr>
-		<th style="width: 35px; text-align: right;">ID</th>
-		<td style="width: 10px;">&nbsp;</td>
-		<th style="width: 200px; vertical-align: bottom">Song</th>
-		<th style="width: 150px;">Artist</th>
-		<th style="width: 150px;">Album</th>
-		<th style="width: 100px;">By</th>
-		<th style="width: 150px;">On</th>
+		<th>ID</th>
+		<td>&nbsp;</td>
+		<th>Song</th>
+		<th>Artist</th>
+		<th>Album</th>
+		<th>By</th>
+		<th>On</th>
 	</tr>
 	<tr><td colspan="9"><div class="sexy_line"></div></td></tr>
 	<?php foreach($music_rows as $music){
         $line++;
-		echo '<tr';
-        echo ($line%2==0)? ' class="line"' : '';
-		echo '>
-		<td style="text-align: right">'.$music['id'].'</td>
+		echo '<tr'. (($line%2==0)? ' class="line"' : '').'>
+		<td>'.$music['id'].'</td>
 		<td>&nbsp;</td>
 		<td>'.$music['song_title'].'</td>
-		<td style="text-align: center">';
-            echo ($music['song_artist'] == null)? '***' : $music['song_artist'];
-		echo'</td>
-		<td style="text-align: center">';
-			echo ($music['song_album'] == null)? '***' : $music['song_album'];
-		echo '</td>';
-        echo '<td style="text-align: center">'.$music['invite_name'].'</td>';
+		<td>'.(($music['song_artist'] == null)? '***' : $music['song_artist']).'</td>
+		<td>'.(($music['song_album'] == null)? '***' : $music['song_album']).'</td>';
+        echo '<td>'.$music['invite_name'].'</td>';
         echo '<td>'.$music['stamp'].'</td>';
 		update_music_entry($music['id']);
-        echo '<td style="text-align: center">';
+        echo '<td>';
         if($music['spotify'] !='')
             echo '<a href="'.$music['spotify'].'"><img src="../imgs/spotify_active.png" alt="Spotify Link" title=""/></a>';
         else

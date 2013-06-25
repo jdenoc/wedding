@@ -5,9 +5,20 @@
  */
 
 $(document).ready(function(){
-    var dir=false;
+    resizeBody();
+
     $('#trigger').click(function(){
         $('.mobile_nav').toggle();
     });
-    console.log('mobile version');
+
+    // Listen for orientation changes
+    window.addEventListener("orientationchange", function(){
+        resizeBody();
+    }, false);
 });
+
+$(document).resize(resizeBody());
+
+function resizeBody(){
+    $('body').css({width: $(window).width()+'px'});
+}

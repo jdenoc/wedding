@@ -2,12 +2,18 @@
 ### Redirect user if URL entered is uppercase
 RewriteEngine on
 RewriteBase /
-#
+
 # force url to lowercase if upper case is found
 RewriteCond %{REQUEST_URI} [A-Z]
 # ensure it is not a file on the drive first
 RewriteCond %{REQUEST_FILENAME} !-s
 RewriteRule (.*) res/rewrite_strtolower.php?rewrite-strtolower-url=$1 [QSA,L]
+#####
+
+#####
+### Redirect bots that search for apple-touch-icon.png, etc...
+RewriteRule ^apple-touch-icon\.png$ /imgs/apple-touch-icon.png [L]
+RewriteRule ^apple-touch-icon-[a-zA-Z0-9].*$ /imgs/apple-touch-icon.png [L]
 #####
 
 #####
