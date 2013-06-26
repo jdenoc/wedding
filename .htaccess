@@ -11,9 +11,10 @@ RewriteRule (.*) res/rewrite_strtolower.php?rewrite-strtolower-url=$1 [QSA,L]
 #####
 
 #####
-### Redirect bots that search for apple-touch-icon.png, etc...
+### Redirect bots that search for apple-touch-icon.png, favicon.ico, etc...
 RewriteRule ^apple-touch-icon\.png$ /imgs/apple-touch-icon.png [L]
 RewriteRule ^apple-touch-icon-[a-zA-Z0-9].*$ /imgs/apple-touch-icon.png [L]
+RewriteRule ^favicon.*$ /imgs/favicon.ico [L]
 #####
 
 #####
