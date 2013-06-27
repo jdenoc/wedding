@@ -61,6 +61,15 @@ header a:hover{
 
 /* ***** Admin Page Table CSS ***** */
 /* *** Guests Table CSS *** */
+#admin #guests a:link,
+#admin #guests a:visited,
+#admin #guests a:hover{
+    text-decoration: none;
+    color:#3299bb;
+}
+#admin #guests a:hover{
+    text-decoration: underline;
+}
 #admin #guests th{
     vertical-align: bottom;
 }
@@ -96,6 +105,14 @@ header a:hover{
 }
 /* *** END - Guests Table CSS *** */
 /* *** Music Table CSS *** */
+#admin #music a:link,
+#admin #music a:visited{
+    text-decoration: none;
+    color:#3299bb;
+}
+#admin #music a:hover{
+    text-decoration: underline;
+}
 #admin #music th{
     vertical-align: bottom;
 }
@@ -132,6 +149,14 @@ header a:hover{
 /* *** Gifts Table CSS *** */
 #admin #gifts{
     margin-top: 10px;
+}
+#admin #gifts a:link,
+#admin #gifts a:visited{
+    text-decoration: none;
+    color:#3299bb;
+}
+#admin #gifts a:hover{
+    text-decoration: underline;
 }
 #admin #gifts th{
     vertical-align: bottom;
@@ -211,16 +236,16 @@ header a:hover{
 .button a:link,
 .button a:visited,
 .button a:hover{
-	text-decoration: none;
+	text-decoration:none !important;
 	padding:5px;
-	color:#111111;
+	color:#111111 !important;
 }
 
 .alt_button a:link,
 .alt_button a:visited,
 .alt_button a:hover{
-    color: #e9e9e9;
-    text-decoration: none;
+    color: #e9e9e9 !important;
+    text-decoration: none !important;
     padding: 3px;
 }
 
