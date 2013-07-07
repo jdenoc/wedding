@@ -1,6 +1,6 @@
 body{
     color: #E9E9E9;
-    background: #111;
+    background-color: #111;
     margin: auto;
     width: 320px;
 }
@@ -177,8 +177,17 @@ header a:hover{
     color: #3299bb;
 }
 
-#main{
-    /*padding: 10px;*/
+#main:before{
+    z-index: -1;
+    background: url('../imgs/bg.png') no-repeat center;
+    opacity: 0.2;
+    filter:alpha(opacity=20);  /* For IE8 and earlier */
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 #main p{

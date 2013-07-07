@@ -1,6 +1,11 @@
 body{
     color: #E9E9E9;
-	background: #111;
+    background-color: #111;
+    margin: auto;
+    /*background-image:url('../imgs/bg.png');*/
+    /*background-repeat:no-repeat;*/
+    /*background-attachment:fixed;*/
+    /*background-position:center;*/
 }
 
 ul{ padding: 0; }
@@ -273,6 +278,19 @@ header a:hover{
 
 #main{
     padding: 10px;
+}
+
+#main:before{
+    z-index: -1;
+    background: url('../imgs/bg.png') no-repeat center;
+    opacity: 0.2;
+    filter:alpha(opacity=20);  /* For IE8 and earlier */
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 #main p{
