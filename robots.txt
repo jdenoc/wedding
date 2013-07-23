@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /admin/fancybox/
 Disallow: /css/
 Disallow: /fancybox/
 Disallow: /gallery/404/
@@ -10,4 +11,5 @@ Disallow: /gallery/wedding/
 Disallow: /js/
 Disallow: /oops/
 Disallow: /rsvp/res/
+Disallow: /rsvp/fancybox/
 Disallow: /res/
