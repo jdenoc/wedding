@@ -99,7 +99,11 @@ header a:hover{
     text-align: center;
 }
 
-
+#admin #gifts a:link,
+#admin #gifts a:visited {
+    text-decoration: none;
+    color: #3299bb;
+}
 
 .text{
     padding: 20px;
@@ -142,9 +146,9 @@ header a:hover{
 .button a:link,
 .button a:visited,
 .button a:hover{
-    text-decoration: none;
+    text-decoration: none !important;
     padding:5px;
-    color:#111111;
+    color:#111111 !important;
 }
 
 .alt_button a:link,
@@ -211,7 +215,6 @@ header a:hover{
     padding: 10px;
     margin: auto;
     font-weight: bold;
-    /*height: 30px;*/
     font-size: 16px;
 }
 .nav ul{
@@ -232,7 +235,7 @@ header a:hover{
 .nav #navigation_menu #trigger{
     display: block;
     float: right;
-    background: transparent url(../imgs/menu_icon.png) no-repeat;
+    background: transparent url('../imgs/menu_icon.png') no-repeat;
     width: 24px;
     height: 21px;
 }
