@@ -26,9 +26,28 @@ function update_invite_entry($ID, $set){
 $line = 0;
 ?>
 <script type="text/javascript">
-function reload(show){
-    window.location='./admin.php'+show;
-}
+    function reload(show){
+        window.location='./admin.php'+show;
+    }
+    function hideNo(){
+        $("#guests td:nth-child(4):contains('No')").parent().hide();
+    }
+    function hideYes(){
+        $("#guests td:nth-child(4):contains('Yes')").parent().hide();
+    }
+    function showYes(){
+        $("#guests td:nth-child(4):contains('Yes')").parent().show();
+    }
+    function showNo(){
+        $("#guests td:nth-child(4):contains('No')").parent().show();
+    }
+    function hideAll(){
+        $("#guests td").parent().hide();
+    }
+    function showAll(){
+        $("#guests td").parent().show();
+    }
+
 </script>
 Forgot about someone? Then <span class="button">
 <a href="res/add.php" class="inline" title="Add Invite">click here</a></span> to add them.
@@ -43,14 +62,30 @@ Forgot about someone? Then <span class="button">
         <input type="radio" value="usa" name="show" onclick="reload('?show=usa')" <?php echo (isset($_GET['show']) && $_GET['show']=='usa')? 'checked' : '';?>/> Nebraska Only
     </label></li>
 </ul>
+Response:
+<ul style="display: inline">
+    <li style="display:inline"><label>
+        <input type="radio" name="attending" onclick="showAll();" checked />ALL
+    </label></li>
+    <li style="display:inline"><label>
+        <input type="radio" name="attending" onclick="hideAll(); showYes();" />Yes
+    </label></li>
+    <li style="display:inline"><label>
+        <input type="radio" name="attending" onclick="hideAll(); showNo();" />No
+    </label></li>
+    <li style="display:inline"><label>
+        <input type="radio" name="attending" onclick="showAll(); hideNo(); hideYes();" />N/A
+    </label></li>
+</ul>
+
 
 <table border="0" id="guests">
 	<tr>
         <th>ID</th>
-        <td>&nbsp;</td>
+        <th>&nbsp;</th>
         <th>Invitee</th>
 		<th>Coming</th>
-		<td>&nbsp;</td>
+		<th>&nbsp;</th>
 		<th>No. of<br/>Guests</th>
 		<th>Contact<br/>Number</th>
 		<th>Address</th>
