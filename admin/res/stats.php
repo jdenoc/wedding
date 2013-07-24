@@ -11,9 +11,9 @@ $coming = $db->getValue("SELECT SUM(guest_number) FROM details WHERE coming=1");
 $coming_ie = $db->getValue("SELECT SUM(guest_number) FROM details WHERE coming=1 AND location_ID IN (1,0)");
 $coming_ne = $db->getValue("SELECT SUM(guest_number) FROM details WHERE coming=1 AND location_ID IN (2,0)");
 
-$of_invites = $db->getValue("SELECT SUM(invite_number) FROM details WHERE coming=1");
-$of_invites_ie = $db->getValue("SELECT SUM(invite_number) FROM details WHERE coming=1 AND location_ID IN (1,0)");
-$of_invites_ne = $db->getValue("SELECT SUM(invite_number) FROM details WHERE coming=1 AND location_ID IN (2,0)");
+$of_invites = $db->getValue("SELECT SUM(invite_number) FROM details WHERE coming IN (0,1)");
+$of_invites_ie = $db->getValue("SELECT SUM(invite_number) FROM details WHERE coming IN (0,1) AND location_ID IN (1,0)");
+$of_invites_ne = $db->getValue("SELECT SUM(invite_number) FROM details WHERE coming IN (0,1) AND location_ID IN (2,0)");
 
 $sent = $db->getValue('SELECT COUNT(*) FROM details');
 $rsvp = $db->getValue("SELECT COUNT(*) FROM details WHERE coming IN (1,0)");
